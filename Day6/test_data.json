@@ -1,0 +1,41 @@
+[
+  {
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "email": "alice@test.com",
+    "gender": "Female",
+    "mobile": "9998887771",
+    "subjects": ["Maths", "English"],
+    "hobby": [ "Sports","Reading" ],
+    "file_path" : "C:\\Users\\hp\\Downloads\\sampleFile.jpeg",
+    "address": "10, pqr, main road, near city mall, English",
+    "state": "Haryana",
+    "city": "Panipat"
+  },
+  {
+    "first_name": "Bob",
+    "last_name": "Brown",
+    "email": "bob@test.com",
+    "gender": "Male",
+    "mobile": "8887776665",
+    "subjects": ["Physics", "Chemistry", "Maths"],
+    "hobby": ["Reading","Music"],
+    "file_path" : "C:\\Users\\hp\\Downloads\\sampleFile.jpeg",
+    "address": "15, abc, alphabet colony, near elementary chowk, English",
+    "state": "Uttar Pradesh",
+    "city": "Lucknow"
+  },
+  {
+    "first_name": "Charlie",
+    "last_name": "Davis",
+    "email": "charlie@test.com",
+    "gender": "Male",
+    "mobile": "7776665554",
+    "subjects": ["Biology", "Chemistry"],
+    "hobby": ["Sports","Music"],
+    "file_path" : "C:\\Users\\hp\\Downloads\\sampleFile.jpeg",
+    "address": "22, xyz, numeric street, near central park, Biology",
+    "state": "NCR",
+    "city": "Delhi"
+  }  
+]

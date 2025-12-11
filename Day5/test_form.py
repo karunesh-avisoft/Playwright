@@ -17,7 +17,7 @@ def test_practice_form(practice_form,data):
     lastname = practice_form.locator("#lastName")
     email = practice_form.get_by_placeholder("name@example.com")
     mobile = practice_form.get_by_placeholder("Mobile Number")
-    subject = practice_form.locator("#subjectsInput")
+    subject = practice_form.locator(".subjects-auto-complete__control input")
     picture = practice_form.locator("#uploadPicture")
     current_add = practice_form.get_by_placeholder("Current Address")
     select_state = practice_form.get_by_text("Select State")
@@ -36,11 +36,11 @@ def test_practice_form(practice_form,data):
     # subjects
     for sub in data['subjects']:
         subject.type(sub)
-        practice_form.keyboard.press('Enter')
+        subject.press('Enter')
+    subject.press('Tab')
     # hobbies
     for hob in data["hobby"]:
-        # practice_form.get_by_text(hob, exact=True).check()
-        practice_form.locator("div").filter(has_text=re.compile(r"^"+hob+"$")).click()
+        practice_form.locator('label', has_text=hob).click()
     # picture upload
     file_path = data['file_path']
     picture.set_input_files(file_path)
