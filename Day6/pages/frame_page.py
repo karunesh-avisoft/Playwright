@@ -19,4 +19,8 @@ class FramePage:
         # assert page
         expect(self.page.locator('h1')).to_be_visible()
     
+    def assert_content(self, text):
+        # assert frame text
+        assert text == 'This is a sample page', 'Should have this text'
+    
     

@@ -1,3 +1,3 @@
 FRAME1 = '#frame1'
 FRAME2 = '#frame2'
-HEADING = '#sampleHeading'
+HEADING = '//*[@id="sampleHeading"]'
