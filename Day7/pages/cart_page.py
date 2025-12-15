@@ -31,6 +31,8 @@ class CartPage:
         actual_count = self.cart_items.count()
         assert actual_count == expected_count, f"Expected {expected_count} items in cart, found {actual_count}"
         logger.info('Cart items verified')
+
+        
     
     def proceed_to_checkout(self):
         logger.info('Proceeding to checkout')

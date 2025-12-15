@@ -45,18 +45,25 @@ class AuthPage:
         expect(self.logo, "'Swag Labs' logo should be visible").to_be_visible()
         logger.info('On login page...')
     
-    def fill_credentials(self):
+    def fill_credentials(self, user):
         logger.info('Filling credentials')
-        self.user_name.type(standard[0], delay=50)
+        self.user_name.type(standard[user], delay=50)
         self.password.type(passwd, delay=50)
         
     def submit_login(self):
         logger.info('Logging in...')
         self.submit.click()
-        # logger.info('Assert entries')
-        # expect(self.error_container, "Should have entered valid data.").not_to_be_visible()
+        
     
     def cross_error(self):
         self.cross_btn.click()
         logger.info('Closed error message')
+        
+    
+    # ----------Assertions----------
+    def assert_locked_out_error(self):
+        expect(self.error_container).to_be_visible()
+        expect(self.error_container).to_contain_text(
+        "Epic sadface: Sorry, this user has been locked out."
+    )
         

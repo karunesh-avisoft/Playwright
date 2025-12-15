@@ -21,30 +21,27 @@ class CheckoutPage:
     @property
     def first_name_input(self):
         return self.page.locator(L.FIRSTNAME)
-
     @property
     def last_name_input(self):
         return self.page.locator(L.LASTNAME)
-
     @property
     def postal_code_input(self):
         return self.page.locator(L.POSTALCODE)
-
     @property
     def continue_button(self):
         return self.page.locator(L.CONTINUE)
-
     @property
     def title(self):
         return self.page.locator(L.TITLE)
-
     @property
     def finish_button(self):
         return self.page.locator(L.FINISH)
-    
     @property
     def complition_msg(self):
         return self.page.locator(L.COMPLETE_HEADING)
+    @property
+    def error_container(self):
+        return self.page.locator(L.ERROR)
 
     # ----------Actions----------
     def verify_open(self):
@@ -83,3 +80,9 @@ class CheckoutPage:
     def verify_order_completion(self):
         expect(self.complition_msg).to_contain_text('Thank you for your order')
         logger.info('Order completed successfully')
+        
+    # ---------- Assertions ----------
+    def assert_lastname(self):
+        expect(self.error_container).to_be_visible()
+        expect(self.error_container, "Error: Last Name is required").not_to_have_text('Error: Last Name is required')
+        self.page.pause()

@@ -40,6 +40,10 @@ class InventoryPage:
     @property
     def cart(self): 
         return self.page.locator(L.CART)
+    @property
+    def prod_images(self):
+        return self.page.locator(L.INVENTORY_IMAGES)
+
     # ----------Dynamic Locators----------
     def add(self, prod_name):
         return self.page.locator(f"{L.ADD_TO_CART}{prod_name}")
@@ -47,15 +51,20 @@ class InventoryPage:
     def remove(self, prod_name):
         return self.page.locator(f"{L.REMOVE_FROM_CART}{prod_name}")
     
-    # ----------Products name & price----------
+    
+    # ----------Actions----------
     def get_product_names(self):
         return self.item_names.all_text_contents()
-
+    
     def get_product_prices(self):
         prices = self.item_prices.all_text_contents()
         return [float(price.replace("$","")) for price in prices]
     
-    # ----------Actions----------
+    def get_product_images(self):
+        images = self.prod_images.all()
+        return [img.get_attribute("src") for img in images]
+        
+        
     def verify_open(self):
         logger.info('Landing to inventory page')
         expect(self.page, "Should be on inventory page").to_have_url(inventory)
@@ -108,28 +117,48 @@ class InventoryPage:
             logger.info('Products sorted High to Low successfully')
         
     # Adding and removing items from cart   
-    def add_to_cart(self):
-        for idx in range(0, len(self.product_names), 2):
-            item_name = self.product_names[idx].replace(" ","-").lower()
-            item_price = self.product_prices[idx]
-            add_button = self.add(item_name)
-            add_button.click()
-            self.cart_count += 1
-            self.tot_cart_prices += item_price
-            logger.info(f'Added "{self.product_names[idx]}" to cart. Total items in cart: {self.cart_count}')
-            # Assert item added
-            assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch"
+    def add_to_cart(self, idx):
+        item_name = self.product_names[idx].replace(" ","-").lower()
+        item_price = self.product_prices[idx]
+        add_button = self.add(item_name)
+        add_button.click()
+        self.cart_count += 1
+        self.tot_cart_prices += item_price
+        logger.info(f'Added "{self.product_names[idx]}" to cart. Total items in cart: {self.cart_count}')
+        # Assert item added
+        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch. Product may not be added."
+            
     
-    def remove_from_cart(self):
-        remove_button = self.remove(self.product_names[0].replace(" ","-").lower())
+    def remove_from_cart(self, idx):
+        remove_button = self.remove(self.product_names[idx].replace(" ","-").lower())
         remove_button.click()
         self.cart_count -= 1
-        self.tot_cart_prices -= self.product_prices[0]
-        logger.info(f'Removed "{self.product_names[0]}" from cart. Total items in cart: {self.cart_count}')
+        self.tot_cart_prices -= self.product_prices[idx]
+        logger.info(f'Removed "{self.product_names[idx]}" from cart. Total items in cart: {self.cart_count}')
         # Assert item removed
-        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch"
+        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch. Product may not be removed."
     
     def open_cart(self):
         logger.info('Opening cart page')
         self.cart.click()
         
+    def product_image_mismatch(self):
+        logger.info('Verify product image mismatch.')
+        first_item = self.get_product_names()[0]
+        first_image = self.get_product_images()[0]
+        first_item = first_item.replace("Sauce Labs", "")
+        
+        assert first_item.lower() not in first_image.lower(), "Problem user should show mismatched product image"
+        logger.info('Mismatch expected.')
+    
+    def add_to_problem_cart(self):
+        pass
+        
+        
+        # ----------Assertions----------
+    def assert_add_to_cart(self):
+        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch"
+        
+    def assert_problem_add_to_cart(self):
+        assert self.cart_badge.text_content() != str(self.cart_count), "Cart badge count should mismatch"
+        logger.info(f'Cart Badge count mismatch. There are {self.cart_badge.text_content()} items in cart.')
