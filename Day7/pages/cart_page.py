@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 import logging,os   
-from locators.cart_locators import CartLocators as L
+from locators.cart_checkout_locators import CartCheckoutLocators as L
 
 # logger
 logger = logging.getLogger(__name__)    
@@ -35,4 +35,3 @@ class CartPage:
     def proceed_to_checkout(self):
         logger.info('Proceeding to checkout')
         self.checkout.click()
-        logger.info('Proceeded to checkout')
