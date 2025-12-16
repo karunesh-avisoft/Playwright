@@ -3,12 +3,11 @@ from dotenv import load_dotenv
 import os
 from utilities.common import logger
 from locators.auth_locators import AuthPageLocators as L
+from utilities.credentials import get_users,get_passwd
 
 load_dotenv()
 # environment variables
 base_url = os.getenv('BASE_URL')
-standard = os.getenv('STANDARD_USER').strip("[]").replace('"', '').split(",")
-passwd = os.getenv('PASSWORD')
 inventory = os.getenv('INVENTORY_URL')
 
 class AuthPage:
@@ -42,10 +41,11 @@ class AuthPage:
         expect(self.logo, "'Swag Labs' logo should be visible").to_be_visible()
         logger.info('On login page...')
     
-    def fill_credentials(self, user):
+    def fill_credentials(self, user_idx: int):
         logger.info('Filling credentials')
-        self.user_name.type(standard[user], delay=50)
-        self.password.type(passwd, delay=50)
+        users = get_users()
+        self.user_name.type(users[user_idx])
+        self.password.type(get_passwd())
         
     def submit_login(self):
         logger.info('Logging in...')
