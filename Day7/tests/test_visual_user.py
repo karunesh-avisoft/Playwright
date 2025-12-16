@@ -3,52 +3,36 @@ from pages.auth_page import AuthPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
-from utilities.common import measure
 
 
-def test_peformance_user_flow(page: Page):
+def test_visual_user_flow(login,page: Page):
     # ---------- AUTH ----------
-    auth_page = AuthPage(page)
-    auth_page.open()
-
-    # Login successfully
-    login_time = measure(
-        lambda: (auth_page.fill_credentials(3), auth_page.submit_login())
-    )
-    # Expect slow login
-    assert login_time > 3, f"Login too fast: {login_time}s"
+    login(5)
 
     # ---------- INVENTORY ----------
     inventory_page = InventoryPage(page)
-
     inventory_page.verify_open()
 
     inventory_page.open_burger_menu()
+    inventory_page.assert_hamburger()      #Expect UI error
     inventory_page.close_burger_menu()
-
-    # Sorting performance
-    sort_time = measure(lambda: inventory_page.apply_sort("hilo"))
-    # Expect slow sorting
-    assert sort_time > 3, f"Sorted early in {sort_time}s"
+    inventory_page.assert_cross()           #Expect UI error
 
     # Items to cart
-    inventory_page.add_to_cart(0)    
+    inventory_page.add_to_cart(0)
     inventory_page.add_to_cart(3)
     inventory_page.add_to_cart(4)
     inventory_page.remove_from_cart(3)
 
-    cart_count = inventory_page.cart_count
-    total_cart_prices = inventory_page.tot_cart_prices
-
     # ---------- CART ----------
+    inventory_page.assert_cart_btn()        #Expect UI error
     inventory_page.open_cart()
 
     cart_page = CartPage(page)
     cart_page.verify_open()
-    # Verify cart items
-    cart_page.verify_cart_items(expected_count=cart_count)
 
     # ---------- CHECKOUT ----------
+    cart_page.assert_checkout_btn()         #Expect UI error
     cart_page.proceed_to_checkout()
 
     checkout_page = CheckoutPage(page)
@@ -59,17 +43,13 @@ def test_peformance_user_flow(page: Page):
 
     # Verify checkout page two
     checkout_page.verify_checkout_overview()
-    checkout_page.verify_total_amount(total_cart_prices)
     checkout_page.finish_checkout()
 
     # Verify order completion
     checkout_page.verify_order_completion()
-    
     # Back to inventory
-    back_home_time = measure(lambda: checkout_page.back_to_home())
-    assert back_home_time > 1, f"Early back to inventory in {back_home_time}s"
+    checkout_page.back_to_home()
     
     inventory_page.verify_open()
     # Logout
     inventory_page.log_out()
-

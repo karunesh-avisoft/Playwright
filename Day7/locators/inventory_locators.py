@@ -7,8 +7,10 @@ class InventoryLocators:
     INVENTORY_IMAGES = '//img[@class="inventory_item_img"]'
     ITEM_NAMES = ".inventory_item_name"
     ITEM_PRICES = ".inventory_item_price"
+    CART_CONTAINER = "#shopping_cart_container"
     CART = ".shopping_cart_link"
     CART_BADGE = ".shopping_cart_badge"
     ADD_TO_CART = "#add-to-cart-"
     REMOVE_FROM_CART = "#remove-"
+    LOGOUT = "#logout_sidebar_link"
     

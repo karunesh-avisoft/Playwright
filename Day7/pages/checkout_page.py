@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect
-import logging, os, dotenv, re
+import os, dotenv, re
 from locators.cart_checkout_locators import CartCheckoutLocators as L  
+from utilities.common import logger
 
 dotenv.load_dotenv()
 # environment variables
@@ -9,9 +10,6 @@ firstname = os.getenv('FIRST_NAME')
 lastname = os.getenv('LAST_NAME')   
 postalcode = os.getenv('POSTAL_CODE')
 tax_rate = os.getenv('TAX_RATE')
-
-# logger
-logger = logging.getLogger(__name__)
 
 class CheckoutPage:
     def __init__(self, page: Page):
@@ -42,6 +40,9 @@ class CheckoutPage:
     @property
     def error_container(self):
         return self.page.locator(L.ERROR)
+    @property
+    def back_home(self):
+        return self.page.locator(L.BACK_HOME)
 
     # ----------Actions----------
     def verify_open(self):
@@ -54,6 +55,7 @@ class CheckoutPage:
         self.first_name_input.type(firstname)
         self.last_name_input.type(lastname)
         self.postal_code_input.press_sequentially(postalcode)
+    
 
     def continue_checkout(self):
         logger.info('Submitting checkout information')
@@ -80,9 +82,20 @@ class CheckoutPage:
     def verify_order_completion(self):
         expect(self.complition_msg).to_contain_text('Thank you for your order')
         logger.info('Order completed successfully')
+    
+    def back_to_home(self):
+        self.back_home.click()
         
     # ---------- Assertions ----------
     def assert_lastname(self):
         expect(self.error_container).to_be_visible()
         expect(self.error_container, "Error: Last Name is required").not_to_have_text('Error: Last Name is required')
         self.page.pause()
+        
+    def assert_checkout_details(self):
+        expect(self.last_name_input, 'Should have last name.').to_have_text(lastname)
+        expect(self.first_name_input, 'Should have first name.').to_have_text(firstname)
+        expect(self.last_name_input, 'Should have postal code.').to_have_text(postalcode)
+        
+    def assert_finish_button(self):
+        expect(self.finish_button, "Navigation to order completion stopped for error user.").not_to_be_visible()

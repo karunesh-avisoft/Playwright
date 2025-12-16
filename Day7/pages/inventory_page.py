@@ -1,14 +1,14 @@
 from playwright.sync_api import Page, expect
-import logging,os
+import os
 from locators.inventory_locators import InventoryLocators as L
 from dotenv import load_dotenv
+from utilities.common import logger, dialog_handler
 
 load_dotenv()
 # environment variables
+base_url = os.getenv('BASE_URL')
 inventory = os.getenv('INVENTORY_URL')
 
-# logger
-logger = logging.getLogger(__name__)
 
 class InventoryPage:
     def __init__(self, page: Page):
@@ -38,11 +38,17 @@ class InventoryPage:
     def cart_badge(self):
         return self.page.locator(L.CART_BADGE)
     @property
+    def cart_container(self):
+        return self.page.locator(L.CART_CONTAINER)
+    @property
     def cart(self): 
         return self.page.locator(L.CART)
     @property
     def prod_images(self):
         return self.page.locator(L.INVENTORY_IMAGES)
+    @property
+    def logout(self):
+        return self.page.locator(L.LOGOUT)
 
     # ----------Dynamic Locators----------
     def add(self, prod_name):
@@ -64,10 +70,19 @@ class InventoryPage:
         images = self.prod_images.all()
         return [img.get_attribute("src") for img in images]
         
+    def verify_products(self):
+        logger.info('Verifying products on inventory page')
+        products = self.page.locator(L.PRODUCTS)
+        expect(products, "Products should be available on inventory page").not_to_have_count(0)
+        self.product_names = self.get_product_names()
+        self.product_prices = self.get_product_prices()
+        count = products.count()
+        logger.info(f'Found {count} products on inventory page')    
         
     def verify_open(self):
         logger.info('Landing to inventory page')
         expect(self.page, "Should be on inventory page").to_have_url(inventory)
+        self.verify_products()
         logger.info('On inventory page...')
     
     def open_burger_menu(self):
@@ -82,19 +97,13 @@ class InventoryPage:
         expect(self.burger_menu, "Burger menu button should be visible again").to_be_visible()
         logger.info('Burger menu closed')
         
-    def verify_products(self):
-        logger.info('Verifying products on inventory page')
-        products = self.page.locator(L.PRODUCTS)
-        expect(products, "Products should be available on inventory page").not_to_have_count(0)
-        self.product_names = self.get_product_names()
-        self.product_prices = self.get_product_prices()
-        count = products.count()
-        logger.info(f'Found {count} products on inventory page')    
         
     def apply_sort(self, value):
         self.filter.click()
+        dialog_handler(self.page)       #dialog handler
         self.filter.select_option(value)
         logger.info(f'Applied sort: {value}')
+                
         if value == 'az':
             names_az = self.get_product_names()
             expected = sorted(names_az)
@@ -151,14 +160,26 @@ class InventoryPage:
         assert first_item.lower() not in first_image.lower(), "Problem user should show mismatched product image"
         logger.info('Mismatch expected.')
     
-    def add_to_problem_cart(self):
-        pass
-        
-        
-        # ----------Assertions----------
+    def log_out(self):
+        self.open_burger_menu()
+        self.logout.click()
+        expect(self.page, 'User should logout.').to_have_url(base_url)
+        logger.info('Logged out...')
+            
+            
+    # ----------Assertions----------
     def assert_add_to_cart(self):
         assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch"
         
     def assert_problem_add_to_cart(self):
         assert self.cart_badge.text_content() != str(self.cart_count), "Cart badge count should mismatch"
         logger.info(f'Cart Badge count mismatch. There are {self.cart_badge.text_content()} items in cart.')
+    
+    def assert_hamburger(self):
+        expect(self.page.locator('.bm-icon'), 'Hamburger should be a visual failure element.').to_contain_class('visual_failure')
+        
+    def assert_cross(self):
+        expect(self.page.locator('.bm-cross'), 'Cross buttom should be a visual failure element.').to_contain_class('visual_failure')
+        
+    def assert_cart_btn(self):
+        expect(self.cart_container, 'Cart buttom should be a visual failure element.').to_contain_class('visual_failure')

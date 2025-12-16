@@ -25,8 +25,6 @@ def test_standard_user_flow(page: Page):
     inventory_page.open_burger_menu()
     inventory_page.close_burger_menu()
 
-    inventory_page.verify_products()
-
     # Sorting checks
     inventory_page.apply_sort("az")
     inventory_page.apply_sort("za")
@@ -66,3 +64,9 @@ def test_standard_user_flow(page: Page):
 
     # Verify order completion
     checkout_page.verify_order_completion()
+    # Back to inventory
+    checkout_page.back_to_home()
+    
+    inventory_page.verify_open()
+    # Logout
+    inventory_page.log_out()

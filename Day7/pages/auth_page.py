@@ -1,7 +1,7 @@
 from playwright.sync_api import Page,expect
 from dotenv import load_dotenv
 import os
-import logging
+from utilities.common import logger
 from locators.auth_locators import AuthPageLocators as L
 
 load_dotenv()
@@ -10,9 +10,6 @@ base_url = os.getenv('BASE_URL')
 standard = os.getenv('STANDARD_USER').strip("[]").replace('"', '').split(",")
 passwd = os.getenv('PASSWORD')
 inventory = os.getenv('INVENTORY_URL')
-
-# logger
-logger = logging.getLogger(__name__)
 
 class AuthPage:
     def __init__(self, page:Page):
