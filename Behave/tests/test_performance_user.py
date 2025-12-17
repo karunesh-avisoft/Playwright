@@ -3,36 +3,36 @@ from pages.auth_page import AuthPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
+from utilities.common import measure
 
 
-def test_standard_user_item_purchase_flow(page: Page):
+def test_peformance_user_flow(page: Page):
     # ---------- AUTH ----------
     auth_page = AuthPage(page)
     auth_page.open()
 
-    # Verify error on empty submit
-    auth_page.submit_login()
-    auth_page.cross_error()
-
     # Login successfully
-    auth_page.fill_credentials(0)
-    auth_page.submit_login()
+    login_time = measure(
+        lambda: (auth_page.fill_credentials(3), auth_page.submit_login())
+    )
+    # Expect slow login
+    assert login_time > 3, f"Login too fast: {login_time}s"
 
     # ---------- INVENTORY ----------
     inventory_page = InventoryPage(page)
+
     inventory_page.verify_open()
 
     inventory_page.open_burger_menu()
     inventory_page.close_burger_menu()
 
-    # Sorting checks
-    inventory_page.apply_sort("az")
-    inventory_page.apply_sort("za")
-    inventory_page.apply_sort("lohi")
-    inventory_page.apply_sort("hilo")
+    # Sorting performance
+    sort_time = measure(lambda: inventory_page.apply_sort("hilo"))
+    # Expect slow sorting
+    assert sort_time > 3, f"Sorted early in {sort_time}s"
 
     # Items to cart
-    inventory_page.add_to_cart(0)
+    inventory_page.add_to_cart(0)    
     inventory_page.add_to_cart(3)
     inventory_page.add_to_cart(4)
     inventory_page.remove_from_cart(3)
@@ -64,9 +64,12 @@ def test_standard_user_item_purchase_flow(page: Page):
 
     # Verify order completion
     checkout_page.verify_order_completion()
+    
     # Back to inventory
-    checkout_page.back_to_home()
+    back_home_time = measure(lambda: checkout_page.back_to_home())
+    assert back_home_time > 1, f"Early back to inventory in {back_home_time}s"
     
     inventory_page.verify_open()
     # Logout
     inventory_page.log_out()
+
