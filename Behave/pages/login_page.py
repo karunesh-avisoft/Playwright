@@ -1,19 +1,14 @@
 from playwright.sync_api import Page,expect
-from dotenv import load_dotenv
-import os
+from pages.base_page import BasePage
+from utilities.test_data import TestData as TD
 from utilities.common import logger
 from locators.auth_locators import AuthPageLocators as L
-from utilities.credentials import get_users,get_passwd
+from utilities.credentials import get_user,get_passwd
 
-load_dotenv()
-# environment variables
-base_url = os.getenv('BASE_URL')
-inventory = os.getenv('INVENTORY_URL')
-
-class AuthPage:
+class LoginPage(BasePage):
     def __init__(self, page:Page):
-        self.page = page
-    
+        super().__init__(page)
+
     # ----------Locators----------
     @property
     def logo(self):
@@ -36,15 +31,15 @@ class AuthPage:
     
     # ----------Actions----------
     def open(self):
-        self.page.goto(base_url)
+        self.page.goto(TD.BASE_URL)
         logger.info('Asserting logo')
         expect(self.logo, "'Swag Labs' logo should be visible").to_be_visible()
         logger.info('On login page...')
     
-    def fill_credentials(self, user_idx: int):
+    def fill_credentials(self, user_key: str):
         logger.info('Filling credentials')
-        users = get_users()
-        self.user_name.type(users[user_idx])
+        user = get_user(user_key)
+        self.user_name.type(user)
         self.password.type(get_passwd())
         
     def submit_login(self):

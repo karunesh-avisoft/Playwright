@@ -5,7 +5,7 @@ from pages.checkout_page import CheckoutPage
 
 
 def test_add_to_cart(login, page: Page):
-    login(2)
+    login('problem')
     inventory_page = InventoryPage(page)
     inventory_page.verify_open()
     
@@ -17,15 +17,24 @@ def test_add_to_cart(login, page: Page):
     inventory_page.add_to_cart(3)
     # AssertionError: Cart badge count mismatch
     
-def test_remove_from_cart(inventory_page):
+def test_remove_from_cart(login, page: Page):
+    login('problem')
+    inventory_page = InventoryPage(page)
+    inventory_page.verify_open()
     # ---------- Inventory ----------
     inventory_page.add_to_cart(1)
     inventory_page.remove_from_cart(1)
     
-def test_sorting_inventory(inventory_page):
+def test_sorting_inventory(login, page: Page):
+    login('problem')
+    inventory_page = InventoryPage(page)
+    inventory_page.verify_open()
     inventory_page.apply_sort('za')
     
-def test_checkout_details(inventory_page, page: Page):
+def test_checkout_details(login, page: Page):
+    login('problem')
+    inventory_page = InventoryPage(page)
+    inventory_page.verify_open()
     inventory_page.add_to_cart(1)
     inventory_page.add_to_cart(0)
     inventory_page.open_cart()

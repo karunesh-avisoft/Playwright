@@ -1,5 +1,4 @@
 from playwright.sync_api import Page
-from pages.auth_page import AuthPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.inventory_page import InventoryPage
@@ -7,8 +6,7 @@ from utilities.common import logger
 
 
 def test_error_user_add_items(login, page: Page):
-    login(4)
-
+    login("error")
     inventory = InventoryPage(page)
     inventory.verify_open()
 
@@ -18,8 +16,7 @@ def test_error_user_add_items(login, page: Page):
 
 
 def test_error_user_remove_added_items(login, page: Page):
-    login(4)
-
+    login("error")
     inventory = InventoryPage(page)
     inventory.verify_open()
 
@@ -29,7 +26,7 @@ def test_error_user_remove_added_items(login, page: Page):
 
 
 def test_error_user_sorting(login, page: Page):
-    login(4)
+    login("error")
 
     inventory = InventoryPage(page)
 
@@ -38,7 +35,7 @@ def test_error_user_sorting(login, page: Page):
 
 
 def test_error_user_checkout_form(login, page: Page):
-    login(4)
+    login("error")
     inventory = InventoryPage(page)
     inventory.verify_open()
     inventory.add_to_cart(0)
@@ -55,7 +52,7 @@ def test_error_user_checkout_form(login, page: Page):
 
 
 def test_error_user_finish_enabled(login, page: Page):
-    login(4)
+    login("error")
     inventory = InventoryPage(page)
     inventory.verify_open()
     inventory.add_to_cart(0)

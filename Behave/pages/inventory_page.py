@@ -1,18 +1,13 @@
 from playwright.sync_api import Page, expect
-import os
+from pages.base_page import BasePage
 from locators.inventory_locators import InventoryLocators as L
-from dotenv import load_dotenv
+from utilities.test_data import TestData as TD
 from utilities.common import logger, dialog_handler
 
-load_dotenv()
-# environment variables
-base_url = os.getenv('BASE_URL')
-inventory = os.getenv('INVENTORY_URL')
 
-
-class InventoryPage:
+class InventoryPage(BasePage):
     def __init__(self, page: Page):
-        self.page = page
+        super().__init__(page)
         self.product_names=[]
         self.product_prices=[]
         self.cart_count = 0
@@ -81,7 +76,7 @@ class InventoryPage:
         
     def verify_open(self):
         logger.info('Landing to inventory page')
-        expect(self.page, "Should be on inventory page").to_have_url(inventory)
+        expect(self.page, "Should be on inventory page").to_have_url(TD.INVENTORY_URL)
         self.verify_products()
         logger.info('On inventory page...')
     
@@ -163,7 +158,7 @@ class InventoryPage:
     def log_out(self):
         self.open_burger_menu()
         self.logout.click()
-        expect(self.page, 'User should logout.').to_have_url(base_url)
+        expect(self.page, 'User should logout.').to_have_url(TD.BASE_URL)
         logger.info('Logged out...')
             
             

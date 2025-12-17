@@ -1,0 +1,13 @@
+<testsuite name="login.User Login" tests="1" errors="0" failures="0" skipped="0" time="1.552647" timestamp="2025-12-17T18:34:29.867286" hostname="DESKTOP-SFTALKM"><testcase classname="login.User Login" name="Successful user login" status="passed" time="1.552647"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Successful user login
+    Given User on the login page ... passed in 0.953s
+    When User enter 'standard' and password ... passed in 0.122s
+    And User submit the login form ... passed in 0.308s
+    Then User should be logged in successfully ... passed in 0.169s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

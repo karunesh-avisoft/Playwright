@@ -1,5 +1,4 @@
 from playwright.sync_api import Page
-from pages.auth_page import AuthPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
@@ -7,8 +6,7 @@ from pages.checkout_page import CheckoutPage
 
 def test_visual_user_flow(login,page: Page):
     # ---------- AUTH ----------
-    login(5)
-
+    login("visual")
     # ---------- INVENTORY ----------
     inventory_page = InventoryPage(page)
     inventory_page.verify_open()

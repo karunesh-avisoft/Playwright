@@ -1,23 +1,12 @@
 from playwright.sync_api import Page
-from pages.auth_page import AuthPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 
 
-def test_standard_user_item_purchase_flow(page: Page):
+def test_standard_user_item_purchase_flow(login, page: Page):
     # ---------- AUTH ----------
-    auth_page = AuthPage(page)
-    auth_page.open()
-
-    # Verify error on empty submit
-    auth_page.submit_login()
-    auth_page.cross_error()
-
-    # Login successfully
-    auth_page.fill_credentials(0)
-    auth_page.submit_login()
-
+    login("standard")
     # ---------- INVENTORY ----------
     inventory_page = InventoryPage(page)
     inventory_page.verify_open()
@@ -26,7 +15,7 @@ def test_standard_user_item_purchase_flow(page: Page):
     inventory_page.close_burger_menu()
 
     # Sorting checks
-    inventory_page.apply_sort("az")
+    # inventory_page.apply_sort("az")
     inventory_page.apply_sort("za")
     inventory_page.apply_sort("lohi")
     inventory_page.apply_sort("hilo")

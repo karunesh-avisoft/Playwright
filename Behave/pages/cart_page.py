@@ -1,11 +1,11 @@
-from playwright.sync_api import Page, expect
-import logging,os   
+from playwright.sync_api import Page, expect  
+from pages.base_page import BasePage
 from locators.cart_checkout_locators import CartCheckoutLocators as L
 from utilities.common import logger 
 
-class CartPage:
+class CartPage(BasePage):
     def __init__(self, page: Page):
-        self.page = page
+        super().__init__(page)
 
     # ---------- Locators ----------
     @property

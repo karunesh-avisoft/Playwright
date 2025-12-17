@@ -1,19 +1,14 @@
 from playwright.sync_api import Page
-from pages.auth_page import AuthPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from utilities.common import measure
 
 
-def test_peformance_user_flow(page: Page):
+def test_peformance_user_flow(login,page: Page):
     # ---------- AUTH ----------
-    auth_page = AuthPage(page)
-    auth_page.open()
-
-    # Login successfully
     login_time = measure(
-        lambda: (auth_page.fill_credentials(3), auth_page.submit_login())
+        lambda: (login("performance"))
     )
     # Expect slow login
     assert login_time > 3, f"Login too fast: {login_time}s"
