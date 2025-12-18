@@ -1,15 +1,53 @@
-Feature: User Login # features/login.feature:1
+Feature: Inventory Page Validations # features/inventry.feature:1
 
-  Scenario: Successful user login              # features/login.feature:3
-    Given User on the login page               # features/steps/login_steps.py:7
-    When User enter 'standard' and password    # features/steps/login_steps.py:13
-    And User submit the login form             # features/steps/login_steps.py:17
-    Then User should be logged in successfully # features/steps/login_steps.py:22
+  Feature: Inventory Page Validations  # features/inventry.feature:1
 
-Feature: showing off behave # features/tutorial.feature:1
+  Scenario: Verify available products on inventory page  # features/inventry.feature:7
+    Given User login as 'standard' user                  # features/steps/common_steps.py:7
+    Then User navigates to the inventory page            # features/steps/inventry_steps.py:5
+    Then User should see 6 products listed               # features/steps/inventry_steps.py:12
 
-  Scenario: run a simple test        # features/tutorial.feature:3
-    Given we have behave installed   # features/steps/tutorial_steps.py:3
-    When we implement a test         # features/steps/tutorial_steps.py:7
-    Then behave will test it for us! # features/steps/tutorial_steps.py:11
+  Scenario: Verify cart badge updates after adding items        # features/inventry.feature:10
+    Given User login as 'standard' user                         # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                   # features/steps/inventry_steps.py:5
+    When User adds item 'bolt t-shirt' to the cart              # features/steps/inventry_steps.py:17
+    Then The cart badge should show the correct number of items # features/steps/inventry_steps.py:32
+
+  Scenario: Verify cart badge updates after removing items      # features/inventry.feature:14
+    Given User login as 'standard' user                         # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                   # features/steps/inventry_steps.py:5
+    When User adds item 'bike light' to the cart                # features/steps/inventry_steps.py:17
+    And User adds item 'bolt t-shirt' to the cart               # features/steps/inventry_steps.py:17
+    And User removes item 'bike light' from the cart            # features/steps/inventry_steps.py:22
+    Then The cart badge should show the correct number of items # features/steps/inventry_steps.py:32
+
+  Scenario Outline: Sort products by different options -- @1.1   # features/inventry.feature:26
+    Given User login as 'standard' user                          # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                    # features/steps/inventry_steps.py:5
+    When the user sorts products by 'az'                         # None
+    Then the products should be sorted by 'name ascending' order # None
+
+  Scenario Outline: Sort products by different options -- @1.2    # features/inventry.feature:27
+    Given User login as 'standard' user                           # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                     # features/steps/inventry_steps.py:5
+    When the user sorts products by 'za'                          # None
+    Then the products should be sorted by 'name descending' order # None
+
+  Scenario Outline: Sort products by different options -- @1.3    # features/inventry.feature:28
+    Given User login as 'standard' user                           # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                     # features/steps/inventry_steps.py:5
+    When the user sorts products by 'lohi'                        # None
+    Then the products should be sorted by 'price ascending' order # None
+
+  Scenario Outline: Sort products by different options -- @1.4     # features/inventry.feature:29
+    Given User login as 'standard' user                            # features/steps/common_steps.py:7
+    Then User navigates to the inventory page                      # features/steps/inventry_steps.py:5
+    When the user sorts products by 'hi'                           # None
+    Then the products should be sorted by 'price descending' order # None
+
+  Scenario: Logout from inventory page               # features/inventry.feature:31
+    Given User login as 'standard' user              # features/steps/common_steps.py:7
+    Then User navigates to the inventory page        # features/steps/inventry_steps.py:5
+    When user logs out from the application          # None
+    Then user should be redirected to the login page # None
 

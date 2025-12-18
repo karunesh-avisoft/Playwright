@@ -45,7 +45,7 @@ class InventoryPage(BasePage):
     def logout(self):
         return self.page.locator(L.LOGOUT)
 
-    # ----------Dynamic Locators----------
+    # ---------- Dynamic Locators ----------
     def add(self, prod_name):
         return self.page.locator(f"{L.ADD_TO_CART}{prod_name}")
     
@@ -53,7 +53,7 @@ class InventoryPage(BasePage):
         return self.page.locator(f"{L.REMOVE_FROM_CART}{prod_name}")
     
     
-    # ----------Actions----------
+    # ---------- Actions ----------
     def get_product_names(self):
         return self.item_names.all_text_contents()
     
@@ -68,7 +68,7 @@ class InventoryPage(BasePage):
     def verify_products(self):
         logger.info('Verifying products on inventory page')
         products = self.page.locator(L.PRODUCTS)
-        expect(products, "Products should be available on inventory page").not_to_have_count(0)
+        expect(products, "Products should be available on inventory page").to_have_count(6)
         self.product_names = self.get_product_names()
         self.product_prices = self.get_product_prices()
         count = products.count()
@@ -98,30 +98,24 @@ class InventoryPage(BasePage):
         dialog_handler(self.page)       #dialog handler
         self.filter.select_option(value)
         logger.info(f'Applied sort: {value}')
-                
-        if value == 'az':
-            names_az = self.get_product_names()
-            expected = sorted(names_az)
-            assert names_az == expected, "Products are not sorted A to Z"
-            logger.info('Products sorted A to Z successfully')
-        elif value == 'za':
-            names_za = self.get_product_names()
-            expected = sorted(names_za, reverse=True)
-            assert names_za == expected, "Products are not sorted Z to A"
-            logger.info('Products sorted Z to A successfully')
-        elif value == 'lohi':
-            prices_lohi = self.get_product_prices()
-            expected = sorted(prices_lohi)
-            assert prices_lohi == expected, "Products are not sorted Low to High"
-            logger.info('Products sorted Low to High successfully')
-        elif value == 'hilo':
-            prices_hilo = self.get_product_prices()
-            expected = sorted(prices_hilo, reverse=True)
-            assert prices_hilo == expected, "Products are not sorted High to Low"
-            logger.info('Products sorted High to Low successfully')
-        
+        # sort_type = ""
+        # if value == 'az':
+        #     sort_type = 'name ascending'
+        # elif value == 'za':
+        #     sort_type = 'name descending'
+        # elif value == 'lohi':
+        #     sort_type = 'price low to high'
+        # elif value == 'hilo':
+        #     sort_type = 'price high to low'
+            
+        # self.assert_sort_order(sort_type)
+
     # Adding and removing items from cart   
-    def add_to_cart(self, idx):
+    def add_to_cart(self, item_name):
+        for names in self.product_names:
+            if item_name.lower() in names.lower():
+                idx = self.product_names.index(names)
+                break
         item_name = self.product_names[idx].replace(" ","-").lower()
         item_price = self.product_prices[idx]
         add_button = self.add(item_name)
@@ -130,17 +124,21 @@ class InventoryPage(BasePage):
         self.tot_cart_prices += item_price
         logger.info(f'Added "{self.product_names[idx]}" to cart. Total items in cart: {self.cart_count}')
         # Assert item added
-        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch. Product may not be added."
+        self.assert_badge_count(self.cart_count)
             
     
-    def remove_from_cart(self, idx):
+    def remove_from_cart(self, item_name):
+        for names in self.product_names:
+            if item_name.lower() in names.lower():
+                idx = self.product_names.index(names)
+                break
         remove_button = self.remove(self.product_names[idx].replace(" ","-").lower())
         remove_button.click()
         self.cart_count -= 1
         self.tot_cart_prices -= self.product_prices[idx]
         logger.info(f'Removed "{self.product_names[idx]}" from cart. Total items in cart: {self.cart_count}')
         # Assert item removed
-        assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch. Product may not be removed."
+        self.assert_badge_count(self.cart_count)
     
     def open_cart(self):
         logger.info('Opening cart page')
@@ -158,14 +156,16 @@ class InventoryPage(BasePage):
     def log_out(self):
         self.open_burger_menu()
         self.logout.click()
-        expect(self.page, 'User should logout.').to_have_url(TD.BASE_URL)
-        logger.info('Logged out...')
+        
             
             
-    # ----------Assertions----------
+    # ---------- Assertions ----------
     def assert_add_to_cart(self):
         assert self.cart_badge.text_content() == str(self.cart_count), "Cart badge count mismatch"
-        
+    
+    def assert_badge_count(self, expected_count):
+        assert self.cart_badge.text_content() == str(expected_count), f"Cart badge count mismatch. Expected {expected_count}, but got {self.cart_badge.text_content()}"
+    
     def assert_problem_add_to_cart(self):
         assert self.cart_badge.text_content() != str(self.cart_count), "Cart badge count should mismatch"
         logger.info(f'Cart Badge count mismatch. There are {self.cart_badge.text_content()} items in cart.')
@@ -178,3 +178,29 @@ class InventoryPage(BasePage):
         
     def assert_cart_btn(self):
         expect(self.cart_container, 'Cart buttom should be a visual failure element.').to_contain_class('visual_failure')
+        
+    def assert_sort_order(self, sort_type):
+        if sort_type == 'name ascending':
+            names_az = self.get_product_names()
+            expected = sorted(names_az)
+            assert names_az == expected, "Products are not sorted A to Z"
+            logger.info('Products sorted A to Z successfully')
+        elif sort_type == 'name descending':
+            names_za = self.get_product_names()
+            expected = sorted(names_za, reverse=True)
+            assert names_za == expected, "Products are not sorted Z to A"
+            logger.info('Products sorted Z to A successfully')
+        elif sort_type == 'price ascending':
+            prices_lohi = self.get_product_prices()
+            expected = sorted(prices_lohi)
+            assert prices_lohi == expected, "Products are not sorted Low to High"
+            logger.info('Products sorted Low to High successfully')
+        elif sort_type == 'price descending':
+            prices_hilo = self.get_product_prices()
+            expected = sorted(prices_hilo, reverse=True)
+            assert prices_hilo == expected, "Products are not sorted High to Low"
+            logger.info('Products sorted High to Low successfully')
+        
+    def assert_logout(self):
+        expect(self.page, "Should be on login page after logout").to_have_url(TD.LOGIN_URL)
+        logger.info('Logout successful, back to login page.')   

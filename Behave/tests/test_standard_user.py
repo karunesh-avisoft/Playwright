@@ -17,14 +17,16 @@ def test_standard_user_item_purchase_flow(login, page: Page):
     # Sorting checks
     # inventory_page.apply_sort("az")
     inventory_page.apply_sort("za")
+    inventory_page.assert_sort_order("name descending")
     inventory_page.apply_sort("lohi")
+    inventory_page.assert_sort_order("price ascending")
     inventory_page.apply_sort("hilo")
 
     # Items to cart
-    inventory_page.add_to_cart(0)
-    inventory_page.add_to_cart(3)
-    inventory_page.add_to_cart(4)
-    inventory_page.remove_from_cart(3)
+    inventory_page.add_to_cart("backpack")
+    inventory_page.add_to_cart("bolt t-shirt")
+    inventory_page.add_to_cart("fleece jacket")
+    inventory_page.remove_from_cart("bolt t-shirt")
 
     cart_count = inventory_page.cart_count
     total_cart_prices = inventory_page.tot_cart_prices
@@ -43,7 +45,7 @@ def test_standard_user_item_purchase_flow(login, page: Page):
     checkout_page = CheckoutPage(page)
     # Verify checkout page one
     checkout_page.verify_open()
-    checkout_page.fill_checkout_details()
+    checkout_page.fill_checkout_details('Karunesh', 'Tiwari', 123456)
     checkout_page.continue_checkout()
 
     # Verify checkout page two
