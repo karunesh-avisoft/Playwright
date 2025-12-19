@@ -1,16 +1,17 @@
-<testsuite name="purchase_order.Purchase Order Flow" tests="1" errors="0" failures="0" skipped="0" time="16.310524" timestamp="2025-12-18T18:17:54.578458" hostname="DESKTOP-SFTALKM"><testcase classname="purchase_order.Purchase Order Flow" name="Successful completion of purchase order" status="passed" time="16.310524"><system-out>
+<testsuite name="purchase_order.Successfull Purchase Order Flow" tests="1" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-12-19T16:56:50.261927" hostname="DESKTOP-SFTALKM"><testcase classname="purchase_order.Successfull Purchase Order Flow" name="Successful completion of purchase order" status="untested" time="0"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Successful completion of purchase order
-    Given User login as 'standard' user ... passed in 6.757s
-    Then User navigates to the inventory page ... passed in 0.152s
-    When User adds item 'backpack' to the cart ... passed in 1.045s
-    And User adds item 'fleece jacket' to the cart ... passed in 1.041s
-    And User clicks on the cart icon ... passed in 1.064s
-    And User proceeds to checkout ... passed in 1.036s
-    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' ... passed in 3.102s
-    And User continues to overview and verify total amount as well as finishes the order ... passed in 2.114s
-    Then User should see the order confirmation page with message Thank you for your order! ... passed in 0.000s
+    Given User login as 'standard' user ... untested in 0.000s
+    Then User navigates to the inventory page ... untested in 0.000s
+    When User adds item 'backpack' to the cart ... untested in 0.000s
+    And User adds item 'fleece jacket' to the cart ... untested in 0.000s
+    And User clicks on the cart icon ... untested in 0.000s
+    And User proceeds to checkout page ... untested in 0.000s
+    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' ... untested in 0.000s
+    Then User continue from checkout overview ... untested in 0.000s
+    When User verifies total amount as well as finishes the order ... untested in 0.000s
+    Then User should see the order confirmation page with message Thank you for your order! ... untested in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------

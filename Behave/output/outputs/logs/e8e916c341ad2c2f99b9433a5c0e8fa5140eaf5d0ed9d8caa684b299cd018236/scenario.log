@@ -1,0 +1,11 @@
+﻿18:03:31 - INFO - Asserting logo
+18:03:31 - INFO - On login page...
+18:03:31 - INFO - Filling credentials
+18:03:33 - INFO - Logging in...
+18:03:34 - INFO - Landing to inventory page
+18:03:34 - INFO - Verifying products on inventory page
+18:03:34 - INFO - Found 6 products on inventory page
+18:03:34 - INFO - On inventory page...
+18:03:36 - INFO - Added "Sauce Labs Bike Light" to cart. Total items in cart: 1
+18:03:37 - INFO - Added "Sauce Labs Bolt T-Shirt" to cart. Total items in cart: 2
+18:03:38 - INFO - Removed "Sauce Labs Bike Light" from cart. Total items in cart: 1

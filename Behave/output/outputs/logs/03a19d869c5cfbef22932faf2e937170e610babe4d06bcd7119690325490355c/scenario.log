@@ -1,0 +1,16 @@
+﻿18:03:30 - INFO - Asserting logo
+18:03:30 - INFO - On login page...
+18:03:30 - INFO - Filling credentials
+18:03:32 - INFO - Logging in...
+18:03:34 - INFO - Landing to inventory page
+18:03:34 - INFO - Verifying products on inventory page
+18:03:34 - INFO - Found 6 products on inventory page
+18:03:34 - INFO - On inventory page...
+18:03:35 - INFO - Added "Sauce Labs Bike Light" to cart. Total items in cart: 1
+18:03:36 - INFO - Added "Sauce Labs Bolt T-Shirt" to cart. Total items in cart: 2
+18:03:36 - INFO - Opening cart page
+18:03:37 - INFO - Verifying cart has 2 items
+18:03:37 - INFO - Cart items verified
+18:03:37 - INFO - Proceeding to checkout
+18:03:39 - INFO - Verifying checkout page is open
+18:03:39 - INFO - Checkout page is open

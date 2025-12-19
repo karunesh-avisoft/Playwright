@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="11.756314039230347" tests='2' skipped='0'
+name="Login" failures='0' errors='0'><testcase time="5.950948715209961" name="Successful_User_Login" status="passed"
+         classname="User_Login" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Successful user login
+e                given User on the login page ... passed in 2.122s 
+                when User enters 'standard' as username ... passed in 2.467s 
+                when User submit the login form ... passed in 1.294s 
+                then User navigates to the inventory page ... passed in 0.06782s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="5.805365324020386" name="Unsuccessful_User_Login_With_Incorrect_Username" status="passed"
+         classname="User_Login" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                @invalid_login
+                scenario: Unsuccessful user login with incorrect username
+e                given User on the login page ... passed in 2.03s 
+                when User enters 'wrongUser' as username ... passed in 2.462s 
+                when User submit the login form ... passed in 1.226s 
+                then User should see an error message indicating incorrect/incomplete credentials ... passed in 0.08777s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase></testsuite>

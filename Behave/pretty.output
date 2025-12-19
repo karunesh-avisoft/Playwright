@@ -1,53 +1,15 @@
-Feature: Inventory Page Validations # features/inventry.feature:1
+Feature: Successfull Purchase Order Flow # features/purchase_order.feature:1
 
-  Feature: Inventory Page Validations  # features/inventry.feature:1
+  Feature: Successfull Purchase Order Flow  # features/purchase_order.feature:1
 
-  Scenario: Verify available products on inventory page  # features/inventry.feature:7
-    Given User login as 'standard' user                  # features/steps/common_steps.py:7
-    Then User navigates to the inventory page            # features/steps/inventry_steps.py:5
-    Then User should see 6 products listed               # features/steps/inventry_steps.py:12
-
-  Scenario: Verify cart badge updates after adding items        # features/inventry.feature:10
-    Given User login as 'standard' user                         # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                   # features/steps/inventry_steps.py:5
-    When User adds item 'bolt t-shirt' to the cart              # features/steps/inventry_steps.py:17
-    Then The cart badge should show the correct number of items # features/steps/inventry_steps.py:32
-
-  Scenario: Verify cart badge updates after removing items      # features/inventry.feature:14
-    Given User login as 'standard' user                         # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                   # features/steps/inventry_steps.py:5
-    When User adds item 'bike light' to the cart                # features/steps/inventry_steps.py:17
-    And User adds item 'bolt t-shirt' to the cart               # features/steps/inventry_steps.py:17
-    And User removes item 'bike light' from the cart            # features/steps/inventry_steps.py:22
-    Then The cart badge should show the correct number of items # features/steps/inventry_steps.py:32
-
-  Scenario Outline: Sort products by different options -- @1.1   # features/inventry.feature:26
-    Given User login as 'standard' user                          # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                    # features/steps/inventry_steps.py:5
-    When the user sorts products by 'az'                         # None
-    Then the products should be sorted by 'name ascending' order # None
-
-  Scenario Outline: Sort products by different options -- @1.2    # features/inventry.feature:27
-    Given User login as 'standard' user                           # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                     # features/steps/inventry_steps.py:5
-    When the user sorts products by 'za'                          # None
-    Then the products should be sorted by 'name descending' order # None
-
-  Scenario Outline: Sort products by different options -- @1.3    # features/inventry.feature:28
-    Given User login as 'standard' user                           # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                     # features/steps/inventry_steps.py:5
-    When the user sorts products by 'lohi'                        # None
-    Then the products should be sorted by 'price ascending' order # None
-
-  Scenario Outline: Sort products by different options -- @1.4     # features/inventry.feature:29
-    Given User login as 'standard' user                            # features/steps/common_steps.py:7
-    Then User navigates to the inventory page                      # features/steps/inventry_steps.py:5
-    When the user sorts products by 'hi'                           # None
-    Then the products should be sorted by 'price descending' order # None
-
-  Scenario: Logout from inventory page               # features/inventry.feature:31
-    Given User login as 'standard' user              # features/steps/common_steps.py:7
-    Then User navigates to the inventory page        # features/steps/inventry_steps.py:5
-    When user logs out from the application          # None
-    Then user should be redirected to the login page # None
+  Scenario: Successful completion of purchase order                                                  # features/purchase_order.feature:7
+    Given User login as 'standard' user                                 Then User navigates to the inventory page # features/    And Us    Then User navigates to the inventory page                                                        # features/steps/inventry_steps.py:5
+    When User adds item 'backpack' to the cart                                                       # features/steps/cart_steps.py:20
+    And User adds item 'fleece jacket' to the cart                                                   # features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                                                 # features/steps/cart_steps.py:5
+    And User proceeds to checkout page                                                               # features/steps/cart_steps.py:15
+    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' # features/steps/purchase_order_steps.py:7
+    Then User continue from checkout overview                                                        # features/steps/checkout_steps.py:16
+    When User verifies total amount as well as finishes the order                                    # features/steps/purchase_order_steps.py:15
+    Then User should see the order confirmation page with message Thank you for your order!          # features/steps/purchase_order_steps.py:25
 

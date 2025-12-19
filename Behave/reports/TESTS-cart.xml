@@ -1,0 +1,43 @@
+<testsuite name="cart.Cart Management" tests="3" errors="0" failures="0" skipped="0" time="23.469292" timestamp="2025-12-19T14:46:00.267899" hostname="DESKTOP-SFTALKM"><testcase classname="cart.Cart Management" name="Verify cart updates after adding items" status="passed" time="6.185226"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify cart updates after adding items
+    Given User login as 'standard' user ... passed in 5.078s
+    Then User navigates to the inventory page ... passed in 0.054s
+    When User adds item 'bolt t-shirt' to the cart ... passed in 1.048s
+    Then The cart badge should show the correct number of items ... passed in 0.005s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="cart.Cart Management" name="Verify cart updates after removing items" status="passed" time="8.119586"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify cart updates after removing items
+    Given User login as 'standard' user ... passed in 4.922s
+    Then User navigates to the inventory page ... passed in 0.052s
+    When User adds item 'bike light' to the cart ... passed in 1.053s
+    And User adds item 'bolt t-shirt' to the cart ... passed in 1.048s
+    And User removes item 'bike light' from the cart ... passed in 1.039s
+    Then The cart badge should show the correct number of items ... passed in 0.005s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="cart.Cart Management" name="Verify items and navigation to checkout page from cart" status="passed" time="9.164479"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Verify items and navigation to checkout page from cart
+    Given User login as 'standard' user ... passed in 4.946s
+    Then User navigates to the inventory page ... passed in 0.053s
+    When User adds item 'bike light' to the cart ... passed in 1.040s
+    And User adds item 'bolt t-shirt' to the cart ... passed in 1.032s
+    And User clicks on the cart icon ... passed in 1.042s
+    Then User verify the items in cart ... passed in 0.006s
+    When User proceeds to checkout page ... passed in 1.038s
+    Then User should be navigated to the checkout page ... passed in 0.007s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

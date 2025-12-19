@@ -48,7 +48,7 @@ class LoginPage(BasePage):
         if user is None:
             user = user_key
         self.user_name.type(user)
-        self.password.type(get_passwd())
+        self.password.type(get_passwd() or "secret_sauce")
 
     def submit_login(self):
         logger.info("Logging in...")

@@ -16,3 +16,4 @@ class CartCheckoutLocators:
     COMPLETE_HEADING = ".checkout_complete_container"
     ERROR = ".error-message-container.error"
     BACK_HOME = "#back-to-products" 
+    CANCEL = "#cancel"

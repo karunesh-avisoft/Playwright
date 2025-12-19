@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="46.86341190338135" tests='6' skipped='0'
+name="Inventry" failures='0' errors='0'><testcase time="5.519721031188965" name="Verify_Available_Products_On_Inventory_Page" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Verify available products on inventory page
+                given User login as 'standard' user ... passed in 5.419s 
+                then User navigates to the inventory page ... passed in 0.0674s 
+e                then User should see 6 products listed ... passed in 0.03294s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="9.057845115661621" name="Sort_Products_By_Different_Options_--_@1.1_" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.1 
+                given User login as 'standard' user ... passed in 6.383s 
+                then User navigates to the inventory page ... passed in 0.06782s 
+e                when the user sorts products by 'az' ... passed in 2.59s 
+                then the products should be sorted by 'name ascending' order ... passed in 0.01795s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="8.075307846069336" name="Sort_Products_By_Different_Options_--_@1.2_" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.2 
+                given User login as 'standard' user ... passed in 5.403s 
+                then User navigates to the inventory page ... passed in 0.1466s 
+e                when the user sorts products by 'za' ... passed in 2.516s 
+                then the products should be sorted by 'name descending' order ... passed in 0.009974s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="7.992358207702637" name="Sort_Products_By_Different_Options_--_@1.3_" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.3 
+                given User login as 'standard' user ... passed in 5.421s 
+                then User navigates to the inventory page ... passed in 0.1017s 
+e                when the user sorts products by 'lohi' ... passed in 2.46s 
+                then the products should be sorted by 'price ascending' order ... passed in 0.009973s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="8.32347321510315" name="Sort_Products_By_Different_Options_--_@1.4_" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.4 
+                given User login as 'standard' user ... passed in 5.772s 
+                then User navigates to the inventory page ... passed in 0.08776s 
+e                when the user sorts products by 'hilo' ... passed in 2.45s 
+                then the products should be sorted by 'price descending' order ... passed in 0.01297s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="7.89470648765564" name="Logout_From_Inventory_Page" status="passed"
+         classname="Inventory_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Logout from inventory page
+                given User login as 'standard' user ... passed in 5.347s 
+                then User navigates to the inventory page ... passed in 0.06682s 
+e                when user logs out from the application ... passed in 2.473s 
+                then user should be redirected to the login page ... passed in 0.007979s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase></testsuite>

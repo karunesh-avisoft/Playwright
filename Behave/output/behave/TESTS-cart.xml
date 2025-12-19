@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="27.134104013442993" tests='3' skipped='0'
+name="Cart" failures='0' errors='0'><testcase time="6.849896430969238" name="Verify_Cart_Updates_After_Adding_Items" status="passed"
+         classname="Cart_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Verify cart updates after adding items
+                given User login as 'standard' user ... passed in 5.528s 
+                then User navigates to the inventory page ... passed in 0.07181s 
+e                when User adds item 'bolt t-shirt' to the cart ... passed in 1.243s 
+                then The cart badge should show the correct number of items ... passed in 0.006982s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="9.84190058708191" name="Verify_Cart_Updates_After_Removing_Items" status="passed"
+         classname="Cart_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Verify cart updates after removing items
+                given User login as 'standard' user ... passed in 6.135s 
+                then User navigates to the inventory page ... passed in 0.0748s 
+e                when User adds item 'bike light' to the cart ... passed in 1.207s 
+                when User adds item 'bolt t-shirt' to the cart ... passed in 1.224s 
+                when User removes item 'bike light' from the cart ... passed in 1.195s 
+                then The cart badge should show the correct number of items ... passed in 0.006981s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="10.442306995391846" name="Verify_Items_And_Navigation_To_Checkout_Page_From_Cart" status="passed"
+         classname="Cart_Management" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Verify items and navigation to checkout page from cart
+                given User login as 'standard' user ... passed in 5.404s 
+                then User navigates to the inventory page ... passed in 0.06982s 
+e                when User adds item 'bike light' to the cart ... passed in 1.198s 
+                when User adds item 'bolt t-shirt' to the cart ... passed in 1.201s 
+                when User clicks on the cart icon ... passed in 1.322s 
+                then User verify the items in cart ... passed in 0.006981s 
+                when User proceeds to checkout page ... passed in 1.223s 
+                then User should be navigated to the checkout page ... passed in 0.01796s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase></testsuite>
