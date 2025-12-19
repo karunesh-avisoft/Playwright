@@ -1,0 +1,14 @@
+﻿18:03:42 - INFO - Asserting logo
+18:03:42 - INFO - On login page...
+18:03:42 - INFO - Filling credentials
+18:03:44 - INFO - Logging in...
+18:03:46 - INFO - Landing to inventory page
+18:03:46 - INFO - Verifying products on inventory page
+18:03:46 - INFO - Found 6 products on inventory page
+18:03:46 - INFO - On inventory page...
+18:03:47 - INFO - Added "Sauce Labs Backpack" to cart. Total items in cart: 1
+18:03:48 - INFO - Added "Sauce Labs Onesie" to cart. Total items in cart: 2
+18:03:48 - INFO - Opening cart page
+18:03:49 - INFO - Proceeding to checkout
+18:03:50 - INFO - Filling checkout information
+18:03:54 - INFO - Submitting checkout information

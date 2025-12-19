@@ -1,0 +1,47 @@
+<testsuite name="checkout.Checkout Page" tests="2" errors="1" failures="0" skipped="0" time="20.664253" timestamp="2025-12-19T16:56:50.249956" hostname="DESKTOP-SFTALKM"><testcase classname="checkout.Checkout Page" name="Cancel checkout" status="passed" time="13.411883"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Cancel checkout
+    Given User login as 'problem' user ... passed in 4.953s
+    Then User navigates to the inventory page ... passed in 0.112s
+    When User adds item 'backpack' to the cart ... passed in 1.035s
+    And User adds item 'Onesie' to the cart ... passed in 1.033s
+    And User clicks on the cart icon ... passed in 1.045s
+    And User proceeds to checkout page ... passed in 1.049s
+    When User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' ... passed in 3.127s
+    And User clicks Cancel on overview ... passed in 1.044s
+    Then User navigates to the cart page ... passed in 0.007s
+    And The cart badge should show the correct number of items ... passed in 0.007s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="checkout.Checkout Page" name="Error on empty checkout fields" status="hook_error" time="7.25237"><error type="KeyboardInterrupt" message="">
+<![CDATA[
+Failing step: And User clicks on the cart icon ... error in 0.125s
+Location: features/checkout.feature:8
+ABORTED: By user (KeyboardInterrupt).]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Error on empty checkout fields
+    Given User login as 'problem' user ... passed in 4.969s
+    Then User navigates to the inventory page ... passed in 0.058s
+    When User adds item 'backpack' to the cart ... passed in 1.053s
+    And User adds item 'Onesie' to the cart ... passed in 1.047s
+    And User clicks on the cart icon ... error in 0.125s
+    And User proceeds to checkout page ... skipped in 0.000s
+    When User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' ... skipped in 0.000s
+    Then User continue from checkout overview ... skipped in 0.000s
+    And Error: Last Name is required should be displayed ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out><system-err>
+<![CDATA[
+Captured stderr:
+ABORTED: KeyboardInterrupt
+
+]]>
+</system-err></testcase></testsuite>

@@ -1,0 +1,19 @@
+﻿18:04:15 - INFO - Asserting logo
+18:04:15 - INFO - On login page...
+18:04:15 - INFO - Filling credentials
+18:04:17 - INFO - Logging in...
+18:04:18 - INFO - Landing to inventory page
+18:04:18 - INFO - Verifying products on inventory page
+18:04:18 - INFO - Found 6 products on inventory page
+18:04:18 - INFO - On inventory page...
+18:04:20 - INFO - Added "Sauce Labs Backpack" to cart. Total items in cart: 1
+18:04:21 - INFO - Added "Sauce Labs Fleece Jacket" to cart. Total items in cart: 2
+18:04:21 - INFO - Opening cart page
+18:04:22 - INFO - Proceeding to checkout
+18:04:23 - INFO - Filling checkout information
+18:04:27 - INFO - Submitting checkout information
+18:04:28 - INFO - Verifying checkout overview page is open
+18:04:28 - INFO - Verifying total amount on checkout overview page
+18:04:28 - INFO - Total amount verified successfully
+18:04:28 - INFO - Finishing checkout process
+18:04:29 - INFO - Order completed successfully

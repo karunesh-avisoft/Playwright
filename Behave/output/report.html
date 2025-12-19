@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+
+
+
+
+<html lang="en" manifest="outputs/bootstrap/manifest/report.manifest">
+    <head>
+        <title>Test Execution Report</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <!-- Latest compiled and minified CSS -->
+        <link href="outputs/bootstrap/css/pace-theme-loading-bar.min.css"
+              rel="stylesheet">
+        <link rel="stylesheet" href="outputs/bootstrap/css/behavex.min.css"
+              rel="stylesheet">
+        <link rel="stylesheet"
+              href="outputs/bootstrap/css/bootstrap-theme.min.css">
+        <link href="outputs/bootstrap/css/bootstrap.min.css"
+              rel="stylesheet">
+        <link href="outputs/bootstrap/css/behavex.min.css"
+              rel="stylesheet">
+        <!-- <link href="outputs/bootstrap/css/jquery-ui.min.css"
+              rel="stylesheet">-->
+        <style>
+        .timeline-container {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+            padding: 10px;
+            overflow: visible; /* Allow tooltips to show outside */
+        }
+
+        .worker-timeline-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0px;
+            height: 28px;
+        }
+
+        .worker-timeline-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .worker-label {
+            width: 80px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            text-align: right;
+            padding-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .worker-timeline {
+            flex: 1;
+            height: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            position: relative;
+            overflow: visible; /* Allow tooltips to show outside */
+        }
+
+        .scenario-segment {
+            height: 100%;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .scenario-segment:hover {
+            opacity: 0.8;
+            z-index: 1000;
+        }
+
+        .scenario-passed {
+            background-color: #71C176;
+        }
+
+        .scenario-failed {
+            background-color: #F7819F;
+        }
+
+        .scenario-skipped {
+            background-color: #999;
+        }
+
+        .scenario-untested {
+            background-color: #ccc;
+        }
+
+        /* Ensure tooltips appear above everything */
+        .tooltip {
+            z-index: 10000 !important;
+        }
+
+        .tooltip-inner {
+            max-width: 600px !important;
+        }
+
+        .timeline-summary {
+            text-align: center;
+            color: #666;
+            margin-top: 5px;
+        }
+        </style>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="outputs/bootstrap/js/jquery-1.11.0.min.js"
+                type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/bootstrap.min.js"
+            type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/chart.js"
+            type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/jquery.tablesorter.min.js"
+            type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/jquery.tooltipster.min.js"
+            type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/jquery-ui.min.js"
+            type="application/javascript"></script>
+        <script src="outputs/bootstrap/js/pace.min.js"
+            type="application/javascript"></script>
+        
+    </head>
+    <body><div style="display: none" id="iframe-container">
+                <div id="div-iframe" style="width:97%;height:97%;border:1px solid
+                #ddd;position:absolute;z-index: 1;background-color:white;">
+                </div>
+                <div class="pull-right" style="padding-right: 3%">
+                    <a href="#" class="btn btn-xs btn-warning pull-left"
+                           data-close-iframe>Close X</a>
+                       <div class="navbar-static-top" style="z-index: 1;
+                    position:absolute;">
+                        <a href="#" class="btn btn-xs btn-warning"
+                           data-close-iframe>Close X</a>
+                    </div>
+                </div>
+                <div class="pull-left" style="padding-right: 3%">
+                    <a href="#" class="btn btn-xs btn-warning pull-left"
+                           data-close-iframe>Close X</a>
+                       <div class="navbar-static-top" style="z-index: 1;
+                    position:absolute;">
+                        <a href="#" class="btn btn-xs btn-warning"
+                           data-close-iframe>Close X</a>
+                    </div>
+                </div>
+            </div><nav class="navbar navbar-inverse" style="margin-top:16px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">BehaveX</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- icon behavex-->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Test Report</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <div class="navbar-text" style="padding: 0;margin: 0;margin-top: 0px;">
+                            <span class="glyphicon glyphicon-info-sign btn-lg" data-toggle="tooltip_info"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="accordion2" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default container_body">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapse-filters" aria-expanded="true"
+                                aria-controls="collapse-filters">Filters</button>&nbsp;
+                        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapse-metrics" aria-expanded="false"
+                                aria-controls="collapse-metrics">Metrics</button>
+                    </div>
+                </div>
+                <div id="collapse-metrics" class="metrics-hidden behavex-big-row panel-collapse collapse in"
+                     role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="container-fluid behavex-row-total">
+                            <div class="col-xs-12">
+                                <div class="col-xs-3">
+                                    <h5><b>Automation Rate:        100%</b></h5>
+                                    <canvas id="chart-automation-rate"></canvas>
+                                </div>
+                                <div class="col-xs-3">
+                                    <h5 id="h5-status"><b>Pass Rate:        100%</b></h5>
+                                    <canvas id="chart-pass-rate"></canvas>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h5 id="h5-status"><b>Steps: 25</b><b class="span-behavex" id="reusability"></b></h5>
+                                    <canvas id="chart-steps"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top: 20px;">
+                                <div class="col-xs-12">
+                                                                        <h5><b>Execution Timeline</b></h5>
+                                    <div class="timeline-container"><div class="worker-timeline-row">
+                                                    <div class="worker-label">Worker 0</div>
+                                                    <div class="worker-timeline"><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 0.12%; width: 11.25%;"
+                                                                 data-scenario-name="Verify cart updates after adding items"
+                                                                 data-feature-name="Cart Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147608709"
+                                                                 data-duration="6.849896430969238"
+                                                                 data-worker-id="0">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 13.83%; width: 24.82%;"
+                                                                 data-scenario-name="Cancel checkout"
+                                                                 data-feature-name="Checkout Page"
+                                                                 data-status="passed"
+                                                                 data-start="1766147617061"
+                                                                 data-duration="15.114428758621216"
+                                                                 data-worker-id="0">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 41.39%; width: 13.26%;"
+                                                                 data-scenario-name="Sort products by different options -- @1.2 "
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147633845"
+                                                                 data-duration="8.075307846069336"
+                                                                 data-worker-id="0">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 57.13%; width: 12.96%;"
+                                                                 data-scenario-name="Logout from inventory page"
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147643431"
+                                                                 data-duration="7.89470648765564"
+                                                                 data-worker-id="0">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 72.69%; width: 27.31%;"
+                                                                 data-scenario-name="Successful completion of purchase order"
+                                                                 data-feature-name="Successfull Purchase Order Flow"
+                                                                 data-status="passed"
+                                                                 data-start="1766147652912"
+                                                                 data-duration="16.630250453948975"
+                                                                 data-worker-id="0">
+                                                            </div>
+                                                    </div>
+                                                </div><div class="worker-timeline-row">
+                                                    <div class="worker-label">Worker 1</div>
+                                                    <div class="worker-timeline"><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 0.0%; width: 16.16%;"
+                                                                 data-scenario-name="Verify cart updates after removing items"
+                                                                 data-feature-name="Cart Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147608637"
+                                                                 data-duration="9.84190058708191"
+                                                                 data-worker-id="1">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 19.03%; width: 25.79%;"
+                                                                 data-scenario-name="Error on empty checkout fields"
+                                                                 data-feature-name="Checkout Page"
+                                                                 data-status="passed"
+                                                                 data-start="1766147620225"
+                                                                 data-duration="15.706531524658203"
+                                                                 data-worker-id="1">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 48.1%; width: 13.12%;"
+                                                                 data-scenario-name="Sort products by different options -- @1.3 "
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147637933"
+                                                                 data-duration="7.992358207702637"
+                                                                 data-worker-id="1">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 63.91%; width: 9.77%;"
+                                                                 data-scenario-name="Successful user login"
+                                                                 data-feature-name="User Login"
+                                                                 data-status="passed"
+                                                                 data-start="1766147647559"
+                                                                 data-duration="5.950948715209961"
+                                                                 data-worker-id="1">
+                                                            </div>
+                                                    </div>
+                                                </div><div class="worker-timeline-row">
+                                                    <div class="worker-label">Worker 2</div>
+                                                    <div class="worker-timeline"><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 0.17%; width: 17.15%;"
+                                                                 data-scenario-name="Verify items and navigation to checkout page from cart"
+                                                                 data-feature-name="Cart Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147608739"
+                                                                 data-duration="10.442306995391846"
+                                                                 data-worker-id="2">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 20.69%; width: 9.06%;"
+                                                                 data-scenario-name="Verify available products on inventory page"
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147621239"
+                                                                 data-duration="5.519721031188965"
+                                                                 data-worker-id="2">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 32.35%; width: 14.87%;"
+                                                                 data-scenario-name="Sort products by different options -- @1.1 "
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147628341"
+                                                                 data-duration="9.057845115661621"
+                                                                 data-worker-id="2">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 50.59%; width: 13.67%;"
+                                                                 data-scenario-name="Sort products by different options -- @1.4 "
+                                                                 data-feature-name="Inventory Management"
+                                                                 data-status="passed"
+                                                                 data-start="1766147639450"
+                                                                 data-duration="8.32347321510315"
+                                                                 data-worker-id="2">
+                                                            </div><div class="scenario-segment scenario-passed"
+                                                                 style="position: absolute; left: 67.05%; width: 9.53%;"
+                                                                 data-scenario-name="Unsuccessful user login with incorrect username"
+                                                                 data-feature-name="User Login"
+                                                                 data-status="passed"
+                                                                 data-start="1766147649476"
+                                                                 data-duration="5.805365324020386"
+                                                                 data-worker-id="2">
+                                                            </div>
+                                                    </div>
+                                                </div></div>
+                                                                        <div class="timeline-summary"><small>14 scenarios across 3 workers| 14 passed</small><br>
+                                        <small style="color: #888; font-style: italic;">
+                                            💡 Tip: If execution appears unbalanced across workers, consider using @ORDER tags to control test execution sequence for better load distribution.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-bottom: 30px;">
+                                <!-- Extra space after timeline -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapse-filters" class="behavex-big-row panel-collapse collapse in"
+                     role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="container-fluid behavex-row-total">
+                            <div class="row"><br>
+                                <div class="col-sm-3 pull-left report-filter">
+                                    <div class="form-group form-group-sm">
+                                        <b>
+                                        <label class="control-label pull-left"
+                                               style="padding-top: 5px;padding-right:3px;font-size: 12px;">Search</label>
+                                        <input placeholder="Scenario name..."
+                                               type="text"
+                                               class="input-group form-control-static input-search"
+                                               style="height: 25px"
+                                               data-search>
+                                        </b>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 pull-left report-filter">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label pull-left"
+                                               style="padding-top: 5px;padding-right:3px;font-size: 12px;">
+                                            Tag
+                                        </label>
+                                        <select class="select-filter  form-control-static"
+                                                style="height: 25px"
+                                                data-select-filter-tags>
+                                            <option value="all">All</option><option value="invalid_login"> invalid_login </option></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 pull-left report-filter">
+                                    <div class="form-group form-group-sm">
+                                        <label class="control-label pull-left"
+                                               style="padding-top: 5px;padding-right:3px;font-size: 12px;">
+                                            Status
+                                        </label>
+                                        <select class="select-filter  form-control-static"
+                                                style="height: 25px"
+                                                data-select-filter-status>
+                                            <option value="all">All</option>
+                                            <option value="failed">Failed</option>
+                                            <option value="skipped">Not Run</option>
+                                            <option value="passed">Passed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 pull-left" >
+                                    <div class="form-group form-group-sm">
+                                        <button type="button" class="btn btn-info btn-xs"
+                                                id="button-reset-filter" data-reset-filter>
+                                            <b>Reset</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <table class="table table-bordered behavex_letter" id="summary">
+                <thead>
+                    <tr class="table-header"><th>Feature (5 features)</th><th style="width:120px">Total</th>
+                        <th style="width:120px">Executed</th>
+                        <th style="width:180px">Status</th>
+                        <th style="width:100px">Duration</th>
+                    </tr>
+                </thead><!--<tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]">-->
+                    <tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]" feature_passed>
+                        <td title="Feature" class="green-behavex">
+                             <span class="glyphicon glyphicon-menu-right pull-left"
+                                   data-feature-id="34856"
+                                   data-feature title="Expand the scenarios information">
+                                   <b class="span-behavex">Cart Management</b>
+                             </span>
+                        </td>
+                        <td title="Total">
+                            3</td>
+                        <td title="Executed">
+                            3 (100%)
+                        </td>
+                        <td title="Status">
+                            <table><tr>
+                                <td style="width:40px" class="green-behavex">100%&nbsp;</td>
+                                <td style="width:140px">
+                                    <div class="progress  progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 3, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                    </div>
+                                </td>
+                            </tr></table>
+                        </td>
+                        <td title="Duration">  27s</td>
+                    </tr>
+                    <tr style="display: None" data-feature-id="34856">
+                        <td colspan="5">
+                            <div class="panel-default feature behavex_letter">
+                <div class="panel-body">
+                    <table class="table table-bordered behavex_letter table-scenario" >
+                    <colgroup>
+                        <col><col style="width: 80px"><col style="width: 80px"><col style="width: 80px"><col style="width: 180px">
+                    </colgroup><tr style="display: none" data-info-background="Cart Management"
+                            class="panel-header">
+                            <td colspan="5">
+                                <ul class="background-scenario list-unstyled behavex_letter ul-background-behavex"><li><b>Given </b> User login as &#39;standard&#39; user</li><li><b>Then </b> User navigates to the inventory page</li></ul>
+                            </td>
+                        </tr><tr class="table-header">
+                        <th style="width: auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-name-background="Cart Management" style="cursor:pointer;"
+                                   data-background data-show="false"
+                                   title="Expand the background information"><small
+                                        class="behavex-letter" data-name-background="Cart Management"
+                                           data-background>(show background)</small>
+                                </a></th>
+                        <th style="width: 80px;height: 24px" class="text-center">Type</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Status</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Duration</th>
+                        <th style="width: 180px;height: 24px" class="text-center">Evidence</th>
+                    </tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="703a828591994fcd9a50cc9e33001eb7"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Verify cart updates after adding items</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Verify cart updates after adding items"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="703a828591994fcd9a50cc9e33001eb7"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="703a828591994fcd9a50cc9e33001eb7"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User adds item &#39;bolt t-shirt&#39; to the cart</li><li style="width: 100%;float: left;"><b>Then</b> The cart badge should show the correct number of items</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  6.8s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Ccb40a6ca08678779bd34414e15f934cce8c812bf0c4068ff81bb2f243f6a5bf7%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="425e4a47c7f647fab4e75d797455f579"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Verify cart updates after removing items</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Verify cart updates after removing items"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="425e4a47c7f647fab4e75d797455f579"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="425e4a47c7f647fab4e75d797455f579"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User adds item &#39;bike light&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User adds item &#39;bolt t-shirt&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User removes item &#39;bike light&#39; from the cart</li><li style="width: 100%;float: left;"><b>Then</b> The cart badge should show the correct number of items</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  9.8s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Ce8e916c341ad2c2f99b9433a5c0e8fa5140eaf5d0ed9d8caa684b299cd018236%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="41283546cc7f45158aab6f209227733a"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Verify items and navigation to checkout page from cart</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Verify items and navigation to checkout page from cart"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="41283546cc7f45158aab6f209227733a"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="41283546cc7f45158aab6f209227733a"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User adds item &#39;bike light&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User adds item &#39;bolt t-shirt&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User clicks on the cart icon</li><li style="width: 100%;float: left;"><b>Then</b> User verify the items in cart</li><li style="width: 100%;float: left;"><b>When</b> User proceeds to checkout page</li><li style="width: 100%;float: left;"><b>Then</b> User should be navigated to the checkout page</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  10.4s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C03a19d869c5cfbef22932faf2e937170e610babe4d06bcd7119690325490355c%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr></table>
+            </div>
+        </div>
+                        </td>
+                    </tr><!--<tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]">-->
+                    <tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]" feature_passed>
+                        <td title="Feature" class="green-behavex">
+                             <span class="glyphicon glyphicon-menu-right pull-left"
+                                   data-feature-id="60661"
+                                   data-feature title="Expand the scenarios information">
+                                   <b class="span-behavex">Checkout Page</b>
+                             </span>
+                        </td>
+                        <td title="Total">
+                            2</td>
+                        <td title="Executed">
+                            2 (100%)
+                        </td>
+                        <td title="Status">
+                            <table><tr>
+                                <td style="width:40px" class="green-behavex">100%&nbsp;</td>
+                                <td style="width:140px">
+                                    <div class="progress  progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 2, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                    </div>
+                                </td>
+                            </tr></table>
+                        </td>
+                        <td title="Duration">  30.8s</td>
+                    </tr>
+                    <tr style="display: None" data-feature-id="60661">
+                        <td colspan="5">
+                            <div class="panel-default feature behavex_letter">
+                <div class="panel-body">
+                    <table class="table table-bordered behavex_letter table-scenario" >
+                    <colgroup>
+                        <col><col style="width: 80px"><col style="width: 80px"><col style="width: 80px"><col style="width: 180px">
+                    </colgroup><tr style="display: none" data-info-background="Checkout Page"
+                            class="panel-header">
+                            <td colspan="5">
+                                <ul class="background-scenario list-unstyled behavex_letter ul-background-behavex"><li><b>Given </b> User login as &#39;problem&#39; user</li><li><b>Then </b> User navigates to the inventory page</li><li><b>When </b> User adds item &#39;backpack&#39; to the cart</li><li><b>And </b> User adds item &#39;Onesie&#39; to the cart</li><li><b>And </b> User clicks on the cart icon</li><li><b>And </b> User proceeds to checkout page</li></ul>
+                            </td>
+                        </tr><tr class="table-header">
+                        <th style="width: auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-name-background="Checkout Page" style="cursor:pointer;"
+                                   data-background data-show="false"
+                                   title="Expand the background information"><small
+                                        class="behavex-letter" data-name-background="Checkout Page"
+                                           data-background>(show background)</small>
+                                </a></th>
+                        <th style="width: 80px;height: 24px" class="text-center">Type</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Status</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Duration</th>
+                        <th style="width: 180px;height: 24px" class="text-center">Evidence</th>
+                    </tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="d924a80b20924d6eb779378650a98db0"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Cancel checkout</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Cancel checkout"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="d924a80b20924d6eb779378650a98db0"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="d924a80b20924d6eb779378650a98db0"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User fills checkout details with first name:&#39;John&#39;, last name:&#39;Problem&#39;, and postal code:&#39;12345&#39;</li><li style="width: 100%;float: left;"><b>And</b> User clicks Cancel on overview</li><li style="width: 100%;float: left;"><b>Then</b> User navigates to the cart page</li><li style="width: 100%;float: left;"><b>And</b> The cart badge should show the correct number of items</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  15.1s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C6c499d7805217a8745b23e866cffb344b23a59ffb410a236c57afb96281972f6%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="51201382666e46198533e45832eaf976"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Error on empty checkout fields</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Error on empty checkout fields"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="51201382666e46198533e45832eaf976"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="51201382666e46198533e45832eaf976"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User fills checkout details with first name:&#39;John&#39;, last name:&#39;Problem&#39;, and postal code:&#39;12345&#39;</li><li style="width: 100%;float: left;"><b>Then</b> User continue from checkout overview</li><li style="width: 100%;float: left;"><b>And</b> Error: Last Name is required should be displayed</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  15.7s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Cab6cb481de78a90b2eecb888ba2d1822c832e7680cb698fb1abf68c6dd4a905f%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr></table>
+            </div>
+        </div>
+                        </td>
+                    </tr><!--<tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]">-->
+                    <tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]" feature_passed>
+                        <td title="Feature" class="green-behavex">
+                             <span class="glyphicon glyphicon-menu-right pull-left"
+                                   data-feature-id="57478"
+                                   data-feature title="Expand the scenarios information">
+                                   <b class="span-behavex">Inventory Management</b>
+                             </span>
+                        </td>
+                        <td title="Total">
+                            6</td>
+                        <td title="Executed">
+                            6 (100%)
+                        </td>
+                        <td title="Status">
+                            <table><tr>
+                                <td style="width:40px" class="green-behavex">100%&nbsp;</td>
+                                <td style="width:140px">
+                                    <div class="progress  progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 6, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                    </div>
+                                </td>
+                            </tr></table>
+                        </td>
+                        <td title="Duration">  46.9s</td>
+                    </tr>
+                    <tr style="display: None" data-feature-id="57478">
+                        <td colspan="5">
+                            <div class="panel-default feature behavex_letter">
+                <div class="panel-body">
+                    <table class="table table-bordered behavex_letter table-scenario" >
+                    <colgroup>
+                        <col><col style="width: 80px"><col style="width: 80px"><col style="width: 80px"><col style="width: 180px">
+                    </colgroup><tr style="display: none" data-info-background="Inventory Management"
+                            class="panel-header">
+                            <td colspan="5">
+                                <ul class="background-scenario list-unstyled behavex_letter ul-background-behavex"><li><b>Given </b> User login as &#39;standard&#39; user</li><li><b>Then </b> User navigates to the inventory page</li></ul>
+                            </td>
+                        </tr><tr class="table-header">
+                        <th style="width: auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-name-background="Inventory Management" style="cursor:pointer;"
+                                   data-background data-show="false"
+                                   title="Expand the background information"><small
+                                        class="behavex-letter" data-name-background="Inventory Management"
+                                           data-background>(show background)</small>
+                                </a></th>
+                        <th style="width: 80px;height: 24px" class="text-center">Type</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Status</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Duration</th>
+                        <th style="width: 180px;height: 24px" class="text-center">Evidence</th>
+                    </tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="68c559c6fbc040089a96c5f08b4ffc0b"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Verify available products on inventory page</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Verify available products on inventory page"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="68c559c6fbc040089a96c5f08b4ffc0b"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="68c559c6fbc040089a96c5f08b4ffc0b"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>Then</b> User should see 6 products listed</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  5.5s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Cc38b301b27c6acedd2f7748b329bf6829ae2c441230897ffaae50cae93a0d2cc%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="3a2c53ddd47548be978e9b08aa13cf89"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Sort products by different options -- @1.1 </b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Sort products by different options -- @1.1 "></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="3a2c53ddd47548be978e9b08aa13cf89"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="3a2c53ddd47548be978e9b08aa13cf89"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> the user sorts products by &#39;az&#39;</li><li style="width: 100%;float: left;"><b>Then</b> the products should be sorted by &#39;name ascending&#39; order</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  9.1s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C639471eb5e5786f404c7f70e44e4f82c89ee8dfc8927ea7125694ab2a4fe841d%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="96219655ad9247a78f258b7e318b046e"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Sort products by different options -- @1.2 </b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Sort products by different options -- @1.2 "></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="96219655ad9247a78f258b7e318b046e"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="96219655ad9247a78f258b7e318b046e"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> the user sorts products by &#39;za&#39;</li><li style="width: 100%;float: left;"><b>Then</b> the products should be sorted by &#39;name descending&#39; order</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  8.1s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C6577ef117a804cc65cddc486c6da235fcd765d0eb3ab6c3af8c5609792f764bc%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="928045fb7203438abe5d0d8126f1b40f"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Sort products by different options -- @1.3 </b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Sort products by different options -- @1.3 "></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="928045fb7203438abe5d0d8126f1b40f"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="928045fb7203438abe5d0d8126f1b40f"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> the user sorts products by &#39;lohi&#39;</li><li style="width: 100%;float: left;"><b>Then</b> the products should be sorted by &#39;price ascending&#39; order</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  8s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Cae6897a83683a62e383f67cff333943228b2159a4ec27d53ddf80ac6c60a5c53%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="c575f7682f614deb86cd1d2a474445f3"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Sort products by different options -- @1.4 </b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Sort products by different options -- @1.4 "></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="c575f7682f614deb86cd1d2a474445f3"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="c575f7682f614deb86cd1d2a474445f3"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> the user sorts products by &#39;hilo&#39;</li><li style="width: 100%;float: left;"><b>Then</b> the products should be sorted by &#39;price descending&#39; order</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  8.3s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C716c767c48e3a051413e0aa62263ab3b214600a2f5eab8364bc3ece09f449741%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="e4ea12b7966f4e72a75f8a28cafc9ad5"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Logout from inventory page</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Logout from inventory page"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="e4ea12b7966f4e72a75f8a28cafc9ad5"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="e4ea12b7966f4e72a75f8a28cafc9ad5"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> user logs out from the application</li><li style="width: 100%;float: left;"><b>Then</b> user should be redirected to the login page</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  7.9s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C2a423f4a96081f3cf8ef293751cbc7cee5b10d776a71cbf4fba4b2af19c6c6f5%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr></table>
+            </div>
+        </div>
+                        </td>
+                    </tr><!--<tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]">-->
+                    <tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[]" feature_passed>
+                        <td title="Feature" class="green-behavex">
+                             <span class="glyphicon glyphicon-menu-right pull-left"
+                                   data-feature-id="14527"
+                                   data-feature title="Expand the scenarios information">
+                                   <b class="span-behavex">Successfull Purchase Order Flow</b>
+                             </span>
+                        </td>
+                        <td title="Total">
+                            1</td>
+                        <td title="Executed">
+                            1 (100%)
+                        </td>
+                        <td title="Status">
+                            <table><tr>
+                                <td style="width:40px" class="green-behavex">100%&nbsp;</td>
+                                <td style="width:140px">
+                                    <div class="progress  progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 1, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                    </div>
+                                </td>
+                            </tr></table>
+                        </td>
+                        <td title="Duration">  16.6s</td>
+                    </tr>
+                    <tr style="display: None" data-feature-id="14527">
+                        <td colspan="5">
+                            <div class="panel-default feature behavex_letter">
+                <div class="panel-body">
+                    <table class="table table-bordered behavex_letter table-scenario" >
+                    <colgroup>
+                        <col><col style="width: 80px"><col style="width: 80px"><col style="width: 80px"><col style="width: 180px">
+                    </colgroup><tr style="display: none" data-info-background="Successfull Purchase Order Flow"
+                            class="panel-header">
+                            <td colspan="5">
+                                <ul class="background-scenario list-unstyled behavex_letter ul-background-behavex"><li><b>Given </b> User login as &#39;standard&#39; user</li><li><b>Then </b> User navigates to the inventory page</li></ul>
+                            </td>
+                        </tr><tr class="table-header">
+                        <th style="width: auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-name-background="Successfull Purchase Order Flow" style="cursor:pointer;"
+                                   data-background data-show="false"
+                                   title="Expand the background information"><small
+                                        class="behavex-letter" data-name-background="Successfull Purchase Order Flow"
+                                           data-background>(show background)</small>
+                                </a></th>
+                        <th style="width: 80px;height: 24px" class="text-center">Type</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Status</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Duration</th>
+                        <th style="width: 180px;height: 24px" class="text-center">Evidence</th>
+                    </tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="e67d1e7cd162460f91a741b68abf3bfa"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Successful completion of purchase order</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Successful completion of purchase order"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="e67d1e7cd162460f91a741b68abf3bfa"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="e67d1e7cd162460f91a741b68abf3bfa"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>When</b> User adds item &#39;backpack&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User adds item &#39;fleece jacket&#39; to the cart</li><li style="width: 100%;float: left;"><b>And</b> User clicks on the cart icon</li><li style="width: 100%;float: left;"><b>And</b> User proceeds to checkout page</li><li style="width: 100%;float: left;"><b>And</b> User fills checkout details with first name:&#39;John&#39;, last name:&#39;Doe&#39;, and postal code:&#39;12345&#39;</li><li style="width: 100%;float: left;"><b>Then</b> User continue from checkout overview</li><li style="width: 100%;float: left;"><b>When</b> User verifies total amount as well as finishes the order</li><li style="width: 100%;float: left;"><b>Then</b> User should see the order confirmation page with message Thank you for your order!</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  16.6s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C7b34d9dbb82e07abf10ce96dcc11495cfe2143e7f6db98ec42426f798543f8e6%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr></table>
+            </div>
+        </div>
+                        </td>
+                    </tr><!--<tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[&#39;invalid_login&#39;]">-->
+                    <tr class="table_row_passed data_feature feature-scenario"
+                        data-feature-tags="[&#39;invalid_login&#39;]" feature_passed>
+                        <td title="Feature" class="green-behavex">
+                             <span class="glyphicon glyphicon-menu-right pull-left"
+                                   data-feature-id="41052"
+                                   data-feature title="Expand the scenarios information">
+                                   <b class="span-behavex">User Login</b>
+                             </span>
+                        </td>
+                        <td title="Total">
+                            2</td>
+                        <td title="Executed">
+                            2 (100%)
+                        </td>
+                        <td title="Status">
+                            <table><tr>
+                                <td style="width:40px" class="green-behavex">100%&nbsp;</td>
+                                <td style="width:140px">
+                                    <div class="progress  progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 2, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                    </div>
+                                </td>
+                            </tr></table>
+                        </td>
+                        <td title="Duration">  11.8s</td>
+                    </tr>
+                    <tr style="display: None" data-feature-id="41052">
+                        <td colspan="5">
+                            <div class="panel-default feature behavex_letter">
+                <div class="panel-body">
+                    <table class="table table-bordered behavex_letter table-scenario" >
+                    <colgroup>
+                        <col><col style="width: 80px"><col style="width: 80px"><col style="width: 80px"><col style="width: 180px">
+                    </colgroup><tr class="table-header">
+                        <th style="width: auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Type</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Status</th>
+                        <th style="width: 80px;height: 24px" class="text-center">Duration</th>
+                        <th style="width: 180px;height: 24px" class="text-center">Evidence</th>
+                    </tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="b609ddd067594803ba0360d2bc1985c4"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Successful user login</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Successful user login"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="b609ddd067594803ba0360d2bc1985c4"
+                                     style="display: None" class="pull-left gherkin">
+                                    <br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="b609ddd067594803ba0360d2bc1985c4"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>Given</b> User on the login page</li><li style="width: 100%;float: left;"><b>When</b> User enters &#39;standard&#39; as username</li><li style="width: 100%;float: left;"><b>And</b> User submit the login form</li><li style="width: 100%;float: left;"><b>Then</b> User navigates to the inventory page</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  6s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5C24cb305d985912d749a56723ecfcf90eb0d14373798da526bf852a003471ddba%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr><!-- scenario_hash has been forced to be a string --><tr class="table_row_commons behavex_letter feature-scenario text-center"
+                                data-scenario-tags="[&#39;invalid_login&#39;]">
+                            <td class="text-left grey-behavex">
+                                <div class="green-behavex alert-success behavex_letter alert-behavex scenario-step">
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-menu-right" data-id-hash="0e89645745b04fbdbf17633c078a2f71"
+                                          title="Expand the scenario information" data-scenario>
+                                          <b class="span-behavex" style="cursor: pointer;">Unsuccessful user login with incorrect username</b>&nbsp;<b class="glyphicon glyphicon-copy glyphicon-scenario link-cursor"
+                                             title="Copy scenario name" data-copy-text="Unsuccessful user login with incorrect username"></b></span>
+                                    
+                                </div>
+                                <div data-div-id_hash="0e89645745b04fbdbf17633c078a2f71"
+                                     style="display: None" class="pull-left gherkin">
+                                    
+                                        <ul class="list-unstyled ul-tags-behavex label-behavex" style="font-size: 10px"><li style="float:left;vertical-align: middle;padding:4px 14px 2px 2px;"
+                                                        class="green-behavex" title="Execution Tag">
+                                                                <a class="link-cursor text-info" data-tag="invalid_login">invalid_login</a></li></ul><br><ul class='list-unstyled scenario-step'
+                                        data-div-id_hash="0e89645745b04fbdbf17633c078a2f71"
+                                        style="display: None;width: 100%"><li style="width: 100%;float: left;"><b>Given</b> User on the login page</li><li style="width: 100%;float: left;"><b>When</b> User enters &#39;wrongUser&#39; as username</li><li style="width: 100%;float: left;"><b>And</b> User submit the login form</li><li style="width: 100%;float: left;"><b>Then</b> User should see an error message indicating incorrect/incomplete credentials</li></ul>
+                                </div>
+                            </td>
+                            <td><p class="text-center">Automated</p>
+                                    </td><td><p><b>&nbsp;Passed</b></p></td>
+                                        <td>
+                                            <p class="text-center" title="Total execution time">
+                                                <b>  5.8s</b>
+                                            </p>
+                                        </td><td style="width: 190px;">
+                                        <div class="btn-group text-left"><a href="outputs%5Clogs%5Cc4ed8d7a4a8f75b0e5448ab68c31222ba00ad87db0abe604ed972365c2498d4a%5Cscenario.log"
+                                                   charset="utf-8" class="btn btn-info btn-xs" title="View Test Logs"
+                                                   data-log>
+                                                   <span class="glyphicon glyphicon-zoom-in"></span></a>
+                                            <a charset=utf-8 class="btn btn-info btn-xs" title="Copy link to this scenario" data-share>
+                                                <span class="glyphicon glyphicon-share"></span>
+                                            </a>
+                                        </div>
+                                    </td></tr></table>
+            </div>
+        </div>
+                        </td>
+                    </tr><tr class="behavex-row-total">
+                    <!-- iteritems has been changed to items -->
+                    <td><b>Totals</b></td>
+                    <td><b>14</b></td>
+                    <td><b>14 (100%)</b></td>
+                    <td>
+                        <table><tr>
+                            <td style="width:40px" class="green-behavex"><b>100%&nbsp;</b></td>
+                            <td style="width:140px">
+                                <div class="progress progress-expand-steps"><div class="progress-bar progress-bar-default progress-behavex-passed" role="progressbar" style="width:100%" title="Passed: 14, Failed: 0, Not&nbsp;Run: 0 "></div>
+                                </div>
+                            </td>
+                        </tr></table>
+                    </td>
+                    <td><b> 2m 13.1s</b></td>
+                </tr>
+            </table>
+
+            
+             <div class="modal fade " id="modal-logs" style="display: None">
+                <div class="modal-dialog modal-dialog-style">
+                    <div class="modal-content modal-style">
+                        <div class="modal-header">
+                            <a class="close" data-dismiss="modal">&times;</a>
+                        </div>
+                        <div class="modal-body modal-style-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div id="fill-for-fix"></div>
+    
+    <div class="modal fade" id="report_modal" style="display: None">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3></h3>
+                </div>
+                <div class="modal-body modal-style-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar navbar-bottom"  style="display: none">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h6 id='footer-header'>
+                        BehaveX -
+                        Agile test wrapper on top of Behave (BDD)</h6>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- Script block for JavaScript defined in child templates -->
+<script type="text/javascript">
+//<![CDATA[
+ 
+
+//<![CDATA[
+        // This JavaScript has been refactored to:
+        // 1. Use proper CDATA markers to prevent minification issues
+        // 2. Replace inline onclick handlers with data-* attributes
+        // 3. Add event delegation using $(document).on() to handle dynamically added elements
+        // 4. Move handlers into the document.ready function for better organization
+        // 5. Ensure all JavaScript is properly encapsulated and follows best practices
+
+        $(document).ready(function(){
+            iframe = false;
+
+            // Debug: Check if scenario segments exist
+            console.log('Found', $('.scenario-segment').length, 'scenario segments');
+            $('.scenario-segment').each(function(i) {
+                console.log('Segment', i, ':', $(this).data('scenario-name'));
+            });
+
+            // Remove any existing title attributes to prevent dual tooltips
+            $('.scenario-segment').removeAttr('title');
+
+            // Enhanced tooltips for timeline segments with debouncing for fast mouse movement
+            var tooltipTimeout;
+            var currentTooltipElement = null;
+
+            $('.scenario-segment').on('mouseenter', function() {
+                var $this = $(this);
+
+                // Clear any existing timeout
+                if (tooltipTimeout) {
+                    clearTimeout(tooltipTimeout);
+                }
+
+                // Destroy any existing tooltip immediately
+                if (currentTooltipElement && currentTooltipElement.get(0) !== $this.get(0)) {
+                    try {
+                        currentTooltipElement.tooltip('hide').tooltip('destroy');
+                    } catch (e) { /* ignore */ }
+                }
+
+                currentTooltipElement = $this;
+
+                // Debounce tooltip creation to prevent rapid fire events
+                tooltipTimeout = setTimeout(function() {
+                    try {
+                        var scenarioName = $this.data('scenario-name') || 'Unknown Scenario';
+                        var featureName = $this.data('feature-name') || 'Unknown Feature';
+                        var status = $this.data('status') || 'unknown';
+                        var start = $this.data('start');
+                        var duration = $this.data('duration');
+
+                        // Ensure we have valid numeric values
+                        start = (start !== undefined && start !== null && !isNaN(start)) ? parseFloat(start) : 0;
+                        duration = (duration !== undefined && duration !== null && !isNaN(duration)) ? parseFloat(duration) : 0;
+
+                        // Format duration like "1m 0.4s" or "11h 18m 12.3s"
+                        function formatDuration(seconds) {
+                            if (isNaN(seconds) || seconds < 0) return '0s';
+
+                            var hours = Math.floor(seconds / 3600);
+                            var minutes = Math.floor((seconds % 3600) / 60);
+                            var secs = (seconds % 60);
+
+                            var result = '';
+                            if (hours > 0) result += hours + 'h ';
+                            if (minutes > 0) result += minutes + 'm ';
+                            if (secs > 0 || result === '') {
+                                if (secs % 1 === 0) {
+                                    result += secs + 's';
+                                } else {
+                                    result += secs.toFixed(1) + 's';
+                                }
+                            }
+                            return result.trim();
+                        }
+
+
+
+                        // Format start time as HH:MM:SS only (no date)
+                        function formatStartTime(timestamp) {
+                            if (isNaN(timestamp) || timestamp <= 0) return 'N/A';
+
+                            try {
+                                var date;
+                                // Handle milliseconds timestamp (like 1755135608226)
+                                if (timestamp > 1000000000000) {
+                                    date = new Date(timestamp);
+                                }
+                                // Handle seconds timestamp
+                                else if (timestamp > 1600000000) {
+                                    date = new Date(timestamp * 1000);
+                                }
+                                // Small numbers are relative time
+                                else {
+                                    return formatDuration(timestamp) + ' from start';
+                                }
+
+
+
+                                // Format as HH:MM:SS only (no date)
+                                return String(date.getHours()).padStart(2, '0') + ':' +
+                                       String(date.getMinutes()).padStart(2, '0') + ':' +
+                                       String(date.getSeconds()).padStart(2, '0');
+                            } catch (e) {
+                                return 'N/A';
+                            }
+                        }
+
+                        var formattedDuration = formatDuration(duration);
+                        var formattedStartTime = formatStartTime(start);
+
+                        // Format status safely
+                        var formattedStatus = 'Unknown';
+                        if (status && typeof status === 'string') {
+                            if (status === 'idle') {
+                                formattedStatus = 'Idle';
+                            } else {
+                                formattedStatus = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+                            }
+                        }
+
+                        var tooltipContent = [
+                            '<div style="background: rgba(0,0,0,1.0); color: white; padding: 15px; border-radius: 6px; font-size: 13px; max-width: 600px; min-width: 300px; line-height: 1.5; white-space: normal; word-wrap: break-word; border: 1px solid #333; box-shadow: 0 4px 8px rgba(0,0,0,0.3); text-align: left;">',
+                            '<strong>' + featureName + '</strong><br/>',
+                            '<strong>Scenario:</strong> ' + scenarioName + '<br/>',
+                            '<strong>Status:</strong> ' + formattedStatus + '<br/>',
+                            '<strong>Start time:</strong> ' + formattedStartTime + '<br/>',
+                            '<strong>Duration:</strong> ' + formattedDuration,
+                            '</div>'
+                        ].join('');
+
+                        // Safely destroy any existing tooltip first
+                        try {
+                            $this.tooltip('hide').tooltip('destroy');
+                        } catch (e) { /* ignore */ }
+
+                        // Clear any existing title attributes
+                        $this.removeAttr('title').removeAttr('data-original-title');
+
+                        // Create and show new tooltip
+                        $this.tooltip({
+                            title: tooltipContent,
+                            html: true,
+                            placement: 'auto top',
+                            trigger: 'manual',
+                            container: 'body',
+                            template: '<div class="tooltip" role="tooltip" style="z-index: 10000;"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="background: transparent; border: none; padding: 0; max-width: none; min-width: 300px;"></div></div>'
+                        }).tooltip('show');
+
+                    } catch (error) {
+                        console.warn('Tooltip error:', error);
+                        // Fallback to simple title attribute
+                        var fallbackTitle = scenarioName + ' (' + formattedStatus + ') - ' + formattedDuration;
+                        $this.attr('title', fallbackTitle);
+                    }
+                }, 150); // 150ms delay to prevent rapid fire events
+            }).on('mouseleave', function() {
+                var $this = $(this);
+
+                // Clear the timeout to prevent tooltip creation if mouse left quickly
+                if (tooltipTimeout) {
+                    clearTimeout(tooltipTimeout);
+                    tooltipTimeout = null;
+                }
+
+                // Hide and destroy tooltip with delay to allow mouse to reach tooltip
+                setTimeout(function() {
+                    try {
+                        $this.tooltip('hide').tooltip('destroy');
+                        $this.removeAttr('title').removeAttr('data-original-title');
+                    } catch (e) { /* ignore */ }
+                }, 100);
+
+                // Clear current element reference
+                if (currentTooltipElement && currentTooltipElement.get(0) === $this.get(0)) {
+                    currentTooltipElement = null;
+                }
+            });
+
+            // Event handler for copy buttons
+            $(document).on('click', '[data-copy-text]', function(e){
+                e.stopPropagation();
+                var text = $(this).attr('data-copy-text');
+                copyToClipboard(text);
+            });
+
+            // Event handler for tag links
+            $(document).on('click', '[data-tag]', function(e){
+                e.preventDefault();
+                var tag = $(this).attr('data-tag');
+                show_tag(tag);
+            });
+
+            // Event handler for share buttons
+            $(document).on('click', '[data-share]', function(e){
+                e.preventDefault();
+                var scenario = $(this).closest('tr').find("td:first").find('span:first');
+                var feature_id = scenario.parents('div.feature').parents('tr[data-feature-id]').attr('data-feature-id');
+                var url = $(location).attr('href').split('#')[0];
+                result = url + '#scenario=' + feature_id + '-' + scenario.attr('data-id-hash');
+                copyToClipboard(result);
+                alert("Test scenario link copied!");
+            });
+
+            // Event handler for scenario expand/collapse
+            $(document).on('click', '[data-scenario]', function(e){
+                e.stopPropagation();
+                var element = $(this);
+                var id = element.attr('data-id-hash');
+                var div = $('[data-div-id_hash='+ id +']');
+                if (element.hasClass('glyphicon-menu-right')) {
+                    div.css('display', '');
+                    element.removeClass('glyphicon-menu-right');
+                    element.addClass('glyphicon-menu-down');
+                    element.attr('title', "Collapse the scenario information");
+                } else {
+                    div.css('display', 'None')
+                    element.removeClass('glyphicon-menu-down');
+                    element.addClass('glyphicon-menu-right');
+                    element.attr('title', "Expand the scenario information");
+                    element.parent().parent().parent().find('div.list-extra-log').css('display', 'none');
+                }
+            });
+
+            // Event handler for feature expand/collapse
+            $(document).on('click', '[data-feature]', function(e){
+                e.stopPropagation();
+                var element = $(this);
+                click_data_feature(element, true);
+            });
+
+            // Event handler for background expand/collapse
+            $(document).on('click', '[data-background]', function(e){
+                e.stopPropagation();
+                var element = $(this);
+                var name = element.attr('data-name-background');
+                var tr = $('[data-info-background="'+ name +'"]');
+                if(element.hasClass('panel-header')) {
+                    // this for click of the tr
+                    var tr = element;
+                    element = element.find('+ tr').find('small');
+                }
+                if (element.text().trim() == '(show background)') {
+                    tr.css('display', '')
+                    element.text('(hide background)')
+                    element.attr('title', "Collapse the background information");
+                    element.parent('a').attr('data-show', 'true');
+                } else {
+                    tr.css('display', 'None')
+                    element.text('(show background)');
+                    element.attr('title', "Expand the background information");
+                    element.parent('a').attr('data-show', 'false');
+                }
+            });
+
+            // Event handler for view elements
+            $(document).on('click', '[view]', function(e){
+                e.stopPropagation();
+                var element = $(this);
+                var find  = element.attr('find');
+                var finder = $(find);
+                var word = element.attr('word') || 'scenario';
+                if (element.hasClass('glyphicon-menu-right')) {
+                    finder.css('display', '')
+                    element.removeClass('glyphicon-menu-right');
+                    element.addClass('glyphicon-menu-down');
+                    element.attr('title', "Collapse the  information");
+                } else {
+                    finder.css('display', 'None')
+                    element.removeClass('glyphicon-menu-down');
+                    element.addClass('glyphicon-menu-right');
+                    element.attr('title', "Expand the  information");
+                }
+            });
+
+            // Event handler for log and image links
+            $(document).on('click', '[data-log],[data-image]', function(e){
+                e.preventDefault();
+                iframe = true;
+                var link = $(this);
+                var url = decodeURI(link.attr('href')).replace('C:\\', 'file:///C:/');
+                var modal = $('#modal-logs');
+                var body_modal = modal.find('div.modal-body');
+                body_modal.html('<iframe style="width:100%;height:100%;" frameborder="0" src="' + url + '" />');
+                modal.modal('show');
+            });
+
+            // Event handler for closing iframe
+            $(document).on('click', '[data-close-iframe]', function(){
+                iframe = false;
+                $('#iframe-container').css('display', 'none');
+                $('div.container_body').show();
+                $('nav.nav-behavex').show();
+                $('html, body').animate({scrollTop: $('tr[data-feature-id='+ scenario_frame+']').offset().top});
+            });
+
+            // Event handler for extra logs
+            $(document).on('click', '[data-path-extra]', function(e){
+                e.preventDefault();
+                var div = $($(this).find(" + div")[0]);
+
+                var modal = $('#modal-logs');
+                var body_modal = modal.find('div.modal-body');
+                var clone_div = div.clone();
+                clone_div.css('display', '');
+
+                body_modal.html(clone_div);
+                modal.modal('show');
+            });
+
+            // Event handler for filter status
+            $(document).on('change', '[data-select-filter-status]', function(){
+                var selected = $(this).val();
+                if (selected == 'all') {
+                    show_all();
+                } else {
+                    filter_status(selected);
+                }
+            });
+
+            // Event handler for filter tags
+            $(document).on('change', '[data-select-filter-tags]', function(){
+                var selected = $(this).val();
+                if (selected == 'all') {
+                    show_all();
+                } else {
+                    show_tag(selected);
+                }
+            });
+
+            // Event handler for reset filter
+            $(document).on('click', '[data-reset-filter]', function(){
+                reset_filters();
+                show_all();
+            });
+
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.indexOf('safari') != -1) {
+                if (ua.indexOf('chrome') == -1) {
+                    $('span.glyphicon-share').hide();
+                }
+            }
+            var url = $(location).attr('href');
+            var list_url = url.split('#');
+            if (list_url.length < 2 || (list_url.length == 2 && list_url[1] == '') ){
+                var aux= 0;
+                return 0;
+            }
+            if (list_url.length > 1) {
+                var filter = list_url[1].split('=');
+            } else {
+                return 0;
+            }
+            if (filter.length > 1) {
+                if (filter[0] == 'tag'){
+                    show_tag(filter[1]);
+                } else if (filter[0] == 'scenario'){
+                    show_scenario(filter[1]);
+                }
+            }
+        })
+
+        $("[data-path-extra]").click(function(e){
+            e.preventDefault();
+            var div = $($(this).find(" + div")[0]);
+
+            var modal = $('#modal-logs');
+            var body_modal = modal.find('div.modal-body');
+            var clone_div = div.clone();
+            clone_div.css('display', '');
+
+            body_modal.html(clone_div);
+            modal.modal('show');
+        })
+
+        // Old event handlers have been moved to use event delegation in document.ready
+
+        function filter_status(status){
+            show_all()
+            if (status == 'failed'){
+                $('tr[feature_failed] span').click();
+                $('tr[feature_error] span').click();  // Also expand features with error status
+                $('tr[feature_passed]').hide();
+                $('tr[feature_skipped]').hide();
+                $($('tr[feature_passed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons')).has('div.alert-warning').hide();
+                $($('tr[feature_passed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons')).has('div.alert-success').hide();
+                $($('tr[feature_failed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success')).parents('tr.feature-scenario').hide();
+                $($('tr[feature_failed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning')).parents('tr.feature-scenario').hide();
+                $($('tr[feature_error] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success')).parents('tr.feature-scenario').hide();
+                $($('tr[feature_error] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning')).parents('tr.feature-scenario').hide();
+            } else if (status == 'passed'){
+                $('tr[feature_failed]').hide();
+                $('tr[feature_error]').hide();  // Also hide features with error status
+                $('tr[feature_skipped]').hide();
+                $('tr[feature_skipped] + tr[data-feature-id] td');
+                $($('tr[feature_passed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons')).has('div.alert-warning').hide();
+                $($('tr[feature_passed] + tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons')).has('div.alert-danger').hide();
+                $('tr[feature_failed]').each(function(){
+                    var clickear = false;
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').length > 0) {
+                        div.find('span').click();
+                        div.show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').parents('tr.feature-scenario').show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-danger').parents('tr.feature-scenario').hide();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').parents('tr.feature-scenario').hide();
+                    }
+                });
+                $('tr[feature_error]').each(function(){
+                    var clickear = false;
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').length > 0) {
+                        div.find('span').click();
+                        div.show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').parents('tr.feature-scenario').show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-danger').parents('tr.feature-scenario').hide();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').parents('tr.feature-scenario').hide();
+                    }
+                });
+                $('tr[feature_passed]').each(function(){
+                    var clickear = false;
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').length > 0) {
+                        div.find('span').click();
+                        div.show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-success').parents('tr.feature-scenario').show();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-danger').parents('tr.feature-scenario').hide();
+                        div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').parents('tr.feature-scenario').hide();
+                    }
+                });
+            } else if (status == 'skipped'){
+                $('tr[feature_skipped]  span').click();
+                $('div.alert-danger').parents('tr.feature-scenario').hide();
+                $('div.alert-success').parents('tr.feature-scenario').hide();
+                $('tr[feature_failed]').each(function(){
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').length > 0){
+                        div.find('span').click();
+                        div.show();
+                    } else {
+                        div.hide();
+                        div.next().hide();
+                    }
+                });
+                $('tr[feature_error]').each(function(){
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').length > 0){
+                        div.find('span').click();
+                        div.show();
+                    } else {
+                        div.hide();
+                        div.next().hide();
+                    }
+                });
+                $('tr[feature_passed]').each(function(){
+                    var div = $(this);
+                    if (div.find(' +  tr[data-feature-id] td[colspan=5] div.panel-default div.panel-body table tr.table_row_commons div.alert-warning').length > 0) {
+                        div.find('span').click();
+                        div.show();
+                    } else {
+                        div.hide();
+                        div.next().hide();
+                    }
+                });
+
+            }
+        }
+
+        function reset_filters(filters){
+            var filters = filters || [];
+            if (!(filters.indexOf('tags') >= 0)){
+                $('select[data-select-filter-tags] option[selected]').removeAttr('selected');
+                $('select[data-select-filter-tags] option[value=all]').attr('selected', 'selected');
+            }
+            if (!(filters.indexOf('search') >= 0)){
+                $('[data-search]').val('');
+            }
+            if (!(filters.indexOf('status') >= 0)){
+                $('select[data-select-filter-status] option[selected]').removeAttr('selected');
+                $('select[data-select-filter-status] option[value=all]').attr('selected', 'selected');
+            }
+        }
+
+        $('[data-reset-filter]').click(function(){
+            reset_filters();
+            show_all();
+         });
+
+        function show_all(){
+            $('tr.feature_passed').show();
+            $('tr.feature_failed').show();
+            $('tr.feature_error').show();  // Also show features with error status
+            $('tr.feature_skipped').show();
+            $('tr[data-feature-tags]').show();
+            $('tr[data-feature-id]').hide();
+            $('span.glyphicon-menu-down').click();
+            $('tr[class=behavex-row-total]').show();
+            $('a[data-show=true]').click();
+            $('.feature-scenario').show();
+            $('span[data-feature-id]').parents('tr').find('tr').show();
+        }
+
+        function show_scenario(id_hash_){
+            $('.feature-scenario').hide();
+            $('span.glyphicon-menu-down').click();
+            $('a[data-show=true]').click();
+            reset_filters();
+            var id_feature = id_hash_.split('-')[0];
+            var id_hash = id_hash_.split('-')[1];
+            var span_feature = $('span[data-feature-id="'+ id_feature+'"]');
+            span_feature.parents('tr').show();
+            click_data_feature(span_feature, false);
+            var span_scenario = span_feature.parents('tr').find('+ tr').hide()
+            var span_scenario = span_feature.parents('tr').find('+ tr').find('span[data-id-hash='+ id_hash+']');
+            span_scenario.parents('tr').show();
+            span_scenario.click();
+            span_scenario.parents('tr').focus();
+            $('tr[class=behavex-row-total]').hide();
+        }
+
+        function show_tag(tag){
+            features = $('tr[data-feature-tags]');
+            features.show()
+            $('span.glyphicon-menu-down').click();
+            $('tr[data-scenario-tags]').show();
+            $('a[data-show=true]').click();
+            $('select[data-select-filter-tags] option[value='+ tag +']').attr('selected', 'selected');
+            reset_filters(['tags']);
+
+            for (index = 0; index < features.length; ++index) {
+                var feature = $(features[index]);
+                if (eval(feature.attr('data-feature-tags')).indexOf(tag) < 0) {
+                    feature.hide();
+                } else {
+                    feature.find('span[data-feature]').click();
+                }
+            }
+            scenarios = $('tr[data-scenario-tags]');
+            for (index = 0; index < scenarios.length; ++index) {
+                var scenario = $(scenarios[index]);
+                if (eval(scenario.attr('data-scenario-tags')).indexOf(tag) < 0){
+                    scenario.hide();
+                }
+            }
+            $('tr[class=behavex-row-total]').hide();
+            expanded = document.querySelectorAll("button[aria-controls='collapse-filters']")[0].getAttribute("aria-expanded")
+            if(expanded=="false") {
+                document.querySelectorAll("button[aria-controls='collapse-filters']")[0].click()
+            }
+        }
+
+        function click_data_feature(element, all) {
+            element.children('tr .feature-scenario').show();
+
+            var id = element.attr('data-feature-id');
+            var tr = $('tr[data-feature-id='+ id +']');
+            if (element.hasClass('glyphicon-menu-right')) {
+                tr.css('display', '')
+                element.removeClass('glyphicon-menu-right');
+                element.addClass('glyphicon-menu-down');
+                element.attr('title', "Collapse the scenarios information");
+            } else {
+                tr.css('display', 'None')
+                element.removeClass('glyphicon-menu-down');
+                element.addClass('glyphicon-menu-right');
+                element.attr('title', "Expand the scenarios information");
+            }
+
+        }
+        function copyToClipboard(value) {
+              // Create a "hidden" input
+              var aux = document.createElement("input");
+
+              // Assign it the value of the specified element
+              aux.setAttribute("value", value);
+
+              // Append it to the body
+              document.body.appendChild(aux);
+
+              // Highlight its content
+              aux.select();
+
+              // Copy the highlighted text
+              document.execCommand("copy");
+
+              // Remove it from the body
+              document.body.removeChild(aux);
+        }
+
+        var scenario_frame = '';
+        // These direct event bindings have been replaced with event delegation in document.ready
+        // $('[data-log],[data-image]').click(function(e){ ... });
+        // $('[data-close-iframe]').click(function(){ ... });
+        var scenarios_autocomplete = Array();scenarios_autocomplete.push({'label':'Verify cart updates after adding items',
+            'desc':'34856-703a828591994fcd9a50cc9e33001eb7','value': 'Verify cart updates after adding items' });scenarios_autocomplete.push({'label':'Verify cart updates after removing items',
+            'desc':'34856-425e4a47c7f647fab4e75d797455f579','value': 'Verify cart updates after removing items' });scenarios_autocomplete.push({'label':'Verify items and navigation to checkout page from cart',
+            'desc':'34856-41283546cc7f45158aab6f209227733a','value': 'Verify items and navigation to checkout page from cart' });scenarios_autocomplete.push({'label':'Cancel checkout',
+            'desc':'60661-d924a80b20924d6eb779378650a98db0','value': 'Cancel checkout' });scenarios_autocomplete.push({'label':'Error on empty checkout fields',
+            'desc':'60661-51201382666e46198533e45832eaf976','value': 'Error on empty checkout fields' });scenarios_autocomplete.push({'label':'Verify available products on inventory page',
+            'desc':'57478-68c559c6fbc040089a96c5f08b4ffc0b','value': 'Verify available products on inventory page' });scenarios_autocomplete.push({'label':'Sort products by different options -- @1.1 ',
+            'desc':'57478-3a2c53ddd47548be978e9b08aa13cf89','value': 'Sort products by different options -- @1.1 ' });scenarios_autocomplete.push({'label':'Sort products by different options -- @1.2 ',
+            'desc':'57478-96219655ad9247a78f258b7e318b046e','value': 'Sort products by different options -- @1.2 ' });scenarios_autocomplete.push({'label':'Sort products by different options -- @1.3 ',
+            'desc':'57478-928045fb7203438abe5d0d8126f1b40f','value': 'Sort products by different options -- @1.3 ' });scenarios_autocomplete.push({'label':'Sort products by different options -- @1.4 ',
+            'desc':'57478-c575f7682f614deb86cd1d2a474445f3','value': 'Sort products by different options -- @1.4 ' });scenarios_autocomplete.push({'label':'Logout from inventory page',
+            'desc':'57478-e4ea12b7966f4e72a75f8a28cafc9ad5','value': 'Logout from inventory page' });scenarios_autocomplete.push({'label':'Successful completion of purchase order',
+            'desc':'14527-e67d1e7cd162460f91a741b68abf3bfa','value': 'Successful completion of purchase order' });scenarios_autocomplete.push({'label':'Successful user login',
+            'desc':'41052-b609ddd067594803ba0360d2bc1985c4','value': 'Successful user login' });scenarios_autocomplete.push({'label':'Unsuccessful user login with incorrect username',
+            'desc':'41052-0e89645745b04fbdbf17633c078a2f71','value': 'Unsuccessful user login with incorrect username' });var search = $('[data-search]');
+        search.autocomplete({
+            source: scenarios_autocomplete,
+            select: function(event, ui){
+                show_scenario(ui.item.desc);
+            }
+        });
+
+        $(document.querySelectorAll("button[aria-controls='collapse-metrics']")).on('click', function(e){
+            metrics_panel = document.getElementById("collapse-metrics")
+            if(metrics_panel.classList.contains('metrics-hidden')) {
+                e.stopPropagation();
+                metrics_panel.classList.remove('metrics-hidden');
+                var ctxAutomationRate = document.getElementById("chart-automation-rate").getContext("2d");
+                var ctxPassRate = document.getElementById("chart-pass-rate").getContext("2d");
+                var ctxSteps = document.getElementById("chart-steps").getContext("2d");
+                window.pieChart1 = new Chart(ctxAutomationRate, pieDataAutomationRate);
+                window.pieChart2 = new Chart(ctxPassRate, pieDataPassRate);
+                window.scatterChart1 = new Chart(ctxSteps, scatterDataSteps);
+            }
+         });
+
+        //CHARTS SECTION
+        var
+        green = '#71C176';
+        high_green = '#61B566';
+        red = '#F7819F';
+        high_red = '#E87296';
+        grey = '#999';
+        high_grey = '#777'
+        muted_failed = '0' || 1;
+
+        var decodeHtmlEntity = function(x) {
+          return x.replace(/&#(\d+);/g, function(match, dec) {
+            return String.fromCharCode(dec);
+          });
+        };
+
+        var scatterDataSteps = {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    labels: [decodeHtmlEntity('User adds item &#39;{item}&#39; to the cart'),decodeHtmlEntity('The cart badge should show the correct number of items'),decodeHtmlEntity('User login as &#39;{username}&#39; user'),decodeHtmlEntity('User navigates to the inventory page'),decodeHtmlEntity('User removes item &#39;{item}&#39; from the cart'),decodeHtmlEntity('User clicks on the cart icon'),decodeHtmlEntity('User verify the items in cart'),decodeHtmlEntity('User proceeds to checkout page'),decodeHtmlEntity('User should be navigated to the checkout page'),decodeHtmlEntity('User should see 6 products listed'),decodeHtmlEntity('the user sorts products by &#39;{sort_option}&#39;'),decodeHtmlEntity('the products should be sorted by &#39;{sort_type}&#39; order'),decodeHtmlEntity('user logs out from the application'),decodeHtmlEntity('user should be redirected to the login page'),decodeHtmlEntity('User fills checkout details with first name:&#39;{first_name}&#39;, last name:&#39;{last_name}&#39;, and postal code:&#39;{postal_code}&#39;'),decodeHtmlEntity('User clicks Cancel on overview'),decodeHtmlEntity('User navigates to the cart page'),decodeHtmlEntity('User continue from checkout overview'),decodeHtmlEntity('Error: Last Name is required should be displayed'),decodeHtmlEntity('User on the login page'),decodeHtmlEntity('User enters &#39;{username}&#39; as username'),decodeHtmlEntity('User submit the login form'),decodeHtmlEntity('User should see an error message indicating incorrect/incomplete credentials'),decodeHtmlEntity('User verifies total amount as well as finishes the order'),decodeHtmlEntity('User should see the order confirmation page with message Thank you for your order!'),],
+                    label: 'Passed',
+                    data: [{ x: 11, y: 1.2 },{ x: 3, y: 0.0 },{ x: 12, y: 5.7 },{ x: 13, y: 0.1 },{ x: 1, y: 1.2 },{ x: 4, y: 1.2 },{ x: 1, y: 0.0 },{ x: 4, y: 1.2 },{ x: 1, y: 0.0 },{ x: 1, y: 0.0 },{ x: 4, y: 2.5 },{ x: 4, y: 0.0 },{ x: 1, y: 2.5 },{ x: 1, y: 0.0 },{ x: 3, y: 3.5 },{ x: 1, y: 1.2 },{ x: 1, y: 0.0 },{ x: 2, y: 1.2 },{ x: 1, y: 0.0 },{ x: 2, y: 2.1 },{ x: 2, y: 2.5 },{ x: 2, y: 1.3 },{ x: 1, y: 0.1 },{ x: 1, y: 1.3 },{ x: 1, y: 0.0 },],
+                    backgroundColor: green
+                },{
+                    labels: [],
+                    label: 'Failed',
+                    data: [],
+                    backgroundColor: red
+                }],
+            },
+            options: {
+                scales: {
+                    x: {
+                        min: 0,
+                        title: {
+                            display: true,
+                            text: 'Executions'
+                        },
+                        ticks: {
+                            stepSize: 1
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        title: {
+                            display: true,
+                            text: 'Duration (avg)'
+                        },
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                // console.log(ctx);
+                                var label = [ctx.dataset.labels[ctx.dataIndex]];
+                                label.push("- Executions: " + ctx.parsed.x);
+                                label.push("- Duration (avg): " + ctx.parsed.y + "s");
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        var pieDataAutomationRate = {
+            type: 'pie',
+            data: {
+                labels: ['Automated', 'Manual'],
+                datasets: [{
+                    data: [14, 0],
+                    backgroundColor: [green, grey],
+                    borderWidth: 0.5 ,
+                    borderColor: '#ddd'
+                }]
+            }
+        };
+
+
+        var pieDataPassRate = {
+            type: 'pie',
+            data: {
+                labels: ['Passed', 'Failed'],
+                datasets: [{
+                    data: [14, 0],
+                    backgroundColor: [green, red],
+                    borderWidth: 0.5 ,
+                    borderColor: '#ddd'
+                }]
+            }
+        };document.getElementById("reusability").innerHTML = "&nbsp;&nbsp;&nbsp;(Executions: 78, Avg. Reusability: 3.1)";//]]>
+
+//]]>
+</script>
+
+<!-- Script block for base template JavaScript -->
+<script type="text/javascript">
+//<![CDATA[
+$(window).load(function() {
+    
+    $('.container_body').css('display','');
+    $('.nav-behavex').css('display','');
+    $('.navbar-bottom').css('display','');
+    $('#help-report').click(function($this){
+        if ($('#report_modal').hasClass('in')){
+            $('#report_modal').modal('hide');
+        } else {
+            $('#report_modal').modal('show');
+        }
+    });
+    $('.tr-progress').hover(
+        function(){
+            tr = $(this);
+            tr.find('.progress').css('border', '2px solid #66c4e0');
+        },
+        function(){
+            tr = $(this);
+            tr.find('.progress').css('border', '1px solid #ccc');
+        }
+    );
+});
+
+$(document).ready(function() {
+    // Create tooltip content as a variable first to improve readability and minification
+    var tooltipContent = '<b>Execution Details:</b>' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Parallel processes:</b> 3' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Parallel scheme:</b> scenario' +'<br><br><b>Execution Times:</b>' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Execution start time:</b> 2025-12-19 18:03:24' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Execution end time:</b> 2025-12-19 18:04:29' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Total execution time:</b>  1m 5.2s' +
+               '<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>Total scenarios duration:</b>  2m 13.1s';
+
+    $('[data-toggle="tooltip_info"]').tooltip({
+        title: tooltipContent,
+        placement: "bottom",
+        template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner tooltip-info textarea"></div></div>',
+        html: true
+    });
+});
+//]]>
+</script>
+    </body>
+</html>

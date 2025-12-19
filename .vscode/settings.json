@@ -1,4 +1,4 @@
 {
     "python.defaultInterpreterPath": "C:\\Users\\hp\\Documents\\karunesh\\Playwright\\.venv\\Scripts\\python.exe",
-    "behave-vsc.featuresPath": "Behave\\features"
+    "behave-vsc.featuresPath": "Behave/features",
 }

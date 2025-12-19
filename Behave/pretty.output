@@ -1,15 +1,15 @@
-Feature: User Login # features/login.feature:1
+Feature: Successfull Purchase Order Flow # features/purchase_order.feature:1
 
-  Scenario: Successful user login              # features/login.feature:3
-    Given User on the login page               # features/steps/login_steps.py:7
-    When User enter 'standard' and password    # features/steps/login_steps.py:13
-    And User submit the login form             # features/steps/login_steps.py:17
-    Then User should be logged in successfully # features/steps/login_steps.py:22
+  Feature: Successfull Purchase Order Flow  # features/purchase_order.feature:1
 
-Feature: showing off behave # features/tutorial.feature:1
-
-  Scenario: run a simple test        # features/tutorial.feature:3
-    Given we have behave installed   # features/steps/tutorial_steps.py:3
-    When we implement a test         # features/steps/tutorial_steps.py:7
-    Then behave will test it for us! # features/steps/tutorial_steps.py:11
+  Scenario: Successful completion of purchase order                                                  # features/purchase_order.feature:7
+    Given User login as 'standard' user                                 Then User navigates to the inventory page # features/    And Us    Then User navigates to the inventory page                                                        # features/steps/inventry_steps.py:5
+    When User adds item 'backpack' to the cart                                                       # features/steps/cart_steps.py:20
+    And User adds item 'fleece jacket' to the cart                                                   # features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                                                 # features/steps/cart_steps.py:5
+    And User proceeds to checkout page                                                               # features/steps/cart_steps.py:15
+    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' # features/steps/purchase_order_steps.py:7
+    Then User continue from checkout overview                                                        # features/steps/checkout_steps.py:16
+    When User verifies total amount as well as finishes the order                                    # features/steps/purchase_order_steps.py:15
+    Then User should see the order confirmation page with message Thank you for your order!          # features/steps/purchase_order_steps.py:25
 

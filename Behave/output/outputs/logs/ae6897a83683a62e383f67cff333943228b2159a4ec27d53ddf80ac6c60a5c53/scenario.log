@@ -1,0 +1,10 @@
+﻿18:03:59 - INFO - Asserting logo
+18:03:59 - INFO - On login page...
+18:03:59 - INFO - Filling credentials
+18:04:02 - INFO - Logging in...
+18:04:03 - INFO - Landing to inventory page
+18:04:03 - INFO - Verifying products on inventory page
+18:04:03 - INFO - Found 6 products on inventory page
+18:04:03 - INFO - On inventory page...
+18:04:05 - INFO - Applied sort: lohi
+18:04:05 - INFO - Products sorted Low to High successfully

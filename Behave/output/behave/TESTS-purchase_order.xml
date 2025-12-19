@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="16.630250453948975" tests='1' skipped='0'
+name="Purchase_Order" failures='0' errors='0'><testcase time="16.630250453948975" name="Successful_Completion_Of_Purchase_Order" status="passed"
+         classname="Successfull_Purchase_Order_Flow" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Successful completion of purchase order
+                given User login as 'standard' user ... passed in 5.954s 
+                then User navigates to the inventory page ... passed in 0.06882s 
+e                when User adds item 'backpack' to the cart ... passed in 1.232s 
+                when User adds item 'fleece jacket' to the cart ... passed in 1.214s 
+                when User clicks on the cart icon ... passed in 1.236s 
+                when User proceeds to checkout page ... passed in 1.219s 
+                when User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' ... passed in 3.217s 
+                then User continue from checkout overview ... passed in 1.219s 
+                when User verifies total amount as well as finishes the order ... passed in 1.264s 
+                then User should see the order confirmation page with message Thank you for your order! ... passed in 0.006983s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase></testsuite>

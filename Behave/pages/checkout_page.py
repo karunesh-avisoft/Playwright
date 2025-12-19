@@ -37,18 +37,25 @@ class CheckoutPage(BasePage):
     @property
     def back_home(self):
         return self.page.locator(L.BACK_HOME)
+    @property
+    def cancel(self):
+        return self.page.locator(L.CANCEL)
 
     # ----------Actions----------
     def verify_open(self):
         logger.info('Verifying checkout page is open')
         expect(self.page).to_have_url(TD.CHECKOUT_URL)
         logger.info('Checkout page is open')
-        
-    def fill_checkout_details(self):
+    
+    def cancel_checkout(self):
+        logger.info('Cancelling checkout')
+        self.cancel.click()
+    
+    def fill_checkout_details(self, firstname:str, lastname:str, postalcode:int):
         logger.info('Filling checkout information')
-        self.first_name_input.type(TD.FIRST_NAME)
-        self.last_name_input.type(TD.LAST_NAME)
-        self.postal_code_input.press_sequentially(TD.POSTAL_CODE)
+        self.first_name_input.type(firstname)
+        self.last_name_input.type(lastname)
+        self.postal_code_input.press_sequentially(str(postalcode))
 
     def continue_checkout(self):
         logger.info('Submitting checkout information')
@@ -82,8 +89,8 @@ class CheckoutPage(BasePage):
     # ---------- Assertions ----------
     def assert_lastname(self):
         expect(self.error_container).to_be_visible()
-        expect(self.error_container, "Error: Last Name is required").not_to_have_text('Error: Last Name is required')
-        self.page.pause()
+        expect(self.error_container, "Error: Last Name is required").to_have_text('Error: Last Name is required')
+
         
     def assert_checkout_details(self):
         expect(self.last_name_input, 'Should have last name.').to_have_text(lastname)

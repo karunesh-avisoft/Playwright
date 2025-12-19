@@ -1,0 +1,11 @@
+﻿18:04:05 - INFO - Asserting logo
+18:04:05 - INFO - On login page...
+18:04:05 - INFO - Filling credentials
+18:04:07 - INFO - Logging in...
+18:04:08 - INFO - Landing to inventory page
+18:04:08 - INFO - Verifying products on inventory page
+18:04:08 - INFO - Found 6 products on inventory page
+18:04:08 - INFO - On inventory page...
+18:04:08 - INFO - Opening burger menu
+18:04:10 - INFO - Burger menu opened
+18:04:11 - INFO - Logout successful, back to login page.

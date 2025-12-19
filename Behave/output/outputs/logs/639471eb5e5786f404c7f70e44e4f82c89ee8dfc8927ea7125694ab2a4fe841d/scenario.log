@@ -1,0 +1,10 @@
+﻿18:03:50 - INFO - Asserting logo
+18:03:50 - INFO - On login page...
+18:03:50 - INFO - Filling credentials
+18:03:53 - INFO - Logging in...
+18:03:54 - INFO - Landing to inventory page
+18:03:54 - INFO - Verifying products on inventory page
+18:03:54 - INFO - Found 6 products on inventory page
+18:03:54 - INFO - On inventory page...
+18:03:57 - INFO - Applied sort: az
+18:03:57 - INFO - Products sorted A to Z successfully

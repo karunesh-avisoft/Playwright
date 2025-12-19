@@ -1,0 +1,125 @@
+Feature: Cart Management # Behave/features/cart.feature:1
+
+  Feature: Cart Management  # Behave/features/cart.feature:1
+
+  Scenario: Verify cart updates after adding items              # Behave/features/cart.feature:7
+    Given User login as 'standard' user                         # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                   # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'bolt t-shirt' to the cart              # Behave/features/steps/cart_steps.py:20
+    Then The cart badge should show the correct number of items # Behave/features/steps/cart_steps.py:30
+
+  Scenario: Verify cart updates after removing items            # Behave/features/cart.feature:11
+    Given User login as 'standard' user                         # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                   # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'bike light' to the cart                # Behave/features/steps/cart_steps.py:20
+    And User adds item 'bolt t-shirt' to the cart               # Behave/features/steps/cart_steps.py:20
+    And User removes item 'bike light' from the cart            # Behave/features/steps/cart_steps.py:25
+    Then The cart badge should show the correct number of items # Behave/features/steps/cart_steps.py:30
+
+  Scenario: Verify items and navigation to checkout page from cart  # Behave/features/cart.feature:17
+    Given User login as 'standard' user                             # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                       # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'bike light' to the cart                    # Behave/features/steps/cart_steps.py:20
+    And User adds item 'bolt t-shirt' to the cart                   # Behave/features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                # Behave/features/steps/cart_steps.py:5
+    Then User verify the items in cart                              # Behave/features/steps/cart_steps.py:35
+    When User proceeds to checkout page                             # Behave/features/steps/cart_steps.py:15
+    Then User should be navigated to the checkout page              # Behave/features/steps/checkout_steps.py:5
+
+Feature: Checkout Page # Behave/features/checkout.feature:1
+
+  Feature: Checkout Page  # Behave/features/checkout.feature:1
+
+  Scenario: Cancel checkout                                                                               # Behave/features/checkout.feature:11
+    Given User login as 'problem' user                                                                    # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                                                             # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'backpack' to the cart                                                            # Behave/features/steps/cart_steps.py:20
+    And User adds item 'Onesie' to the cart                                                               # Behave/features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                                                      # Behave/features/steps/cart_steps.py:5
+    And User proceeds to checkout page                                                                    # Behave/features/steps/cart_steps.py:15
+    When User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' # Behave/features/steps/purchase_order_steps.py:7
+    And User clicks Cancel on overview                                                                    # Behave/features/steps/checkout_steps.py:11
+    Then User navigates to the cart page                                                                  # Behave/features/steps/cart_steps.py:10
+    And The cart badge should show the correct number of items                                            # Behave/features/steps/cart_steps.py:30
+
+  Scenario: Error on empty checkout fields                                                                # Behave/features/checkout.feature:17
+    Given User login as 'problem' user                                                                    # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                                                             # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'backpack' to the cart                                                            # Behave/features/steps/cart_steps.py:20
+    And User adds item 'Onesie' to the cart                                                               # Behave/features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                                                      # Behave/features/steps/cart_steps.py:5
+    And User proceeds to checkout page                                                                    # Behave/features/steps/cart_steps.py:15
+    When User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' # Behave/features/steps/purchase_order_steps.py:7
+    Then User continue from checkout overview                                                             # Behave/features/steps/checkout_steps.py:16
+    And Error: Last Name is required should be displayed                                                  # Behave/features/steps/checkout_steps.py:21
+
+Feature: Inventory Management # Behave/features/inventry.feature:1
+
+  Feature: Inventory Management  # Behave/features/inventry.feature:1
+
+  Scenario: Verify available products on inventory page  # Behave/features/inventry.feature:7
+    Given User login as 'standard' user                  # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page            # Behave/features/steps/inventry_steps.py:5
+    Then User should see 6 products listed               # Behave/features/steps/inventry_steps.py:11
+
+  Scenario Outline: Sort products by different options -- @1.1   # Behave/features/inventry.feature:16
+    Given User login as 'standard' user                          # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                    # Behave/features/steps/inventry_steps.py:5
+    When the user sorts products by 'az'                         # Behave/features/steps/inventry_steps.py:16
+    Then the products should be sorted by 'name ascending' order # Behave/features/steps/inventry_steps.py:21
+
+  Scenario Outline: Sort products by different options -- @1.2    # Behave/features/inventry.feature:17
+    Given User login as 'standard' user                           # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                     # Behave/features/steps/inventry_steps.py:5
+    When the user sorts products by 'za'                          # Behave/features/steps/inventry_steps.py:16
+    Then the products should be sorted by 'name descending' order # Behave/features/steps/inventry_steps.py:21
+
+  Scenario Outline: Sort products by different options -- @1.3    # Behave/features/inventry.feature:18
+    Given User login as 'standard' user                           # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                     # Behave/features/steps/inventry_steps.py:5
+    When the user sorts products by 'lohi'                        # Behave/features/steps/inventry_steps.py:16
+    Then the products should be sorted by 'price ascending' order # Behave/features/steps/inventry_steps.py:21
+
+  Scenario Outline: Sort products by different options -- @1.4     # Behave/features/inventry.feature:19
+    Given User login as 'standard' user                            # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                      # Behave/features/steps/inventry_steps.py:5
+    When the user sorts products by 'hilo'                         # Behave/features/steps/inventry_steps.py:16
+    Then the products should be sorted by 'price descending' order # Behave/features/steps/inventry_steps.py:21
+
+  Scenario: Logout from inventory page               # Behave/features/inventry.feature:21
+    Given User login as 'standard' user              # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page        # Behave/features/steps/inventry_steps.py:5
+    When user logs out from the application          # Behave/features/steps/inventry_steps.py:26
+    Then user should be redirected to the login page # Behave/features/steps/inventry_steps.py:31
+
+Feature: User Login # Behave/features/login.feature:1
+
+  Scenario: Successful user login             # Behave/features/login.feature:3
+    Given User on the login page              # Behave/features/steps/login_steps.py:14
+    When User enters 'standard' as username   # Behave/features/steps/login_steps.py:21
+    And User submit the login form            # Behave/features/steps/login_steps.py:27
+    Then User navigates to the inventory page # Behave/features/steps/inventry_steps.py:5
+
+  @invalid_login
+  Scenario: Unsuccessful user login with incorrect username                           # Behave/features/login.feature:10
+    Given User on the login page                                                      # Behave/features/steps/login_steps.py:14
+    When User enters 'wrongUser' as username                                          # Behave/features/steps/login_steps.py:21
+    And User submit the login form                                                    # Behave/features/steps/login_steps.py:27
+    Then User should see an error message indicating incorrect/incomplete credentials # Behave/features/steps/login_steps.py:32
+
+Feature: Successfull Purchase Order Flow # Behave/features/purchase_order.feature:1
+
+  Feature: Successfull Purchase Order Flow  # Behave/features/purchase_order.feature:1
+
+  Scenario: Successful completion of purchase order                                                  # Behave/features/purchase_order.feature:7
+    Given User login as 'standard' user                                                              # Behave/features/steps/login_steps.py:6
+    Then User navigates to the inventory page                                                        # Behave/features/steps/inventry_steps.py:5
+    When User adds item 'backpack' to the cart                                                       # Behave/features/steps/cart_steps.py:20
+    And User adds item 'fleece jacket' to the cart                                                   # Behave/features/steps/cart_steps.py:20
+    And User clicks on the cart icon                                                                 # Behave/features/steps/cart_steps.py:5
+    And User proceeds to checkout page                                                               # Behave/features/steps/cart_steps.py:15
+    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' # Behave/features/steps/purchase_order_steps.py:7
+    Then User continue from checkout overview                                                        # Behave/features/steps/checkout_steps.py:16
+    When User verifies total amount as well as finishes the order                                    # Behave/features/steps/purchase_order_steps.py:15
+    Then User should see the order confirmation page with message Thank you for your order!          # Behave/features/steps/purchase_order_steps.py:25
+
