@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="35.854950189590454" tests='2' skipped='0'
+name="Aturescheckout" failures='0' errors='0'><testcase time="17.796264171600342" name="Cancel_Checkout" status="passed"
+         classname="Checkout_Page" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Cancel checkout
+                given User login as 'problem' user ... passed in 8.012s 
+                then User navigates to the inventory page ... passed in 0.1755s 
+                when User adds item 'backpack' to the cart ... passed in 1.244s 
+                when User adds item 'Onesie' to the cart ... passed in 1.374s 
+                when User clicks on the cart icon ... passed in 1.24s 
+                when User proceeds to checkout page ... passed in 1.24s 
+e                when User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' ... passed in 3.24s 
+                when User clicks Cancel on overview ... passed in 1.215s 
+                then User navigates to the cart page ... passed in 0.0469s 
+                then The cart badge should show the correct number of items ... passed in 0.007978s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="18.058686017990112" name="Error_On_Empty_Checkout_Fields" status="passed"
+         classname="Checkout_Page" >
+            <system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Error on empty checkout fields
+                given User login as 'problem' user ... passed in 8.396s 
+                then User navigates to the inventory page ... passed in 0.2194s 
+                when User adds item 'backpack' to the cart ... passed in 1.248s 
+                when User adds item 'Onesie' to the cart ... passed in 1.199s 
+                when User clicks on the cart icon ... passed in 1.235s 
+                when User proceeds to checkout page ... passed in 1.242s 
+e                when User fills checkout details with first name:'John', last name:'Problem', and postal code:'12345' ... passed in 3.29s 
+                then User continue from checkout overview ... passed in 1.215s 
+                then Error: Last Name is required should be displayed ... passed in 0.01492s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase></testsuite>

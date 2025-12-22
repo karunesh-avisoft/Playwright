@@ -8,7 +8,6 @@ class TestData:
         "visual": "gAAAAABpQUCB4fApxUGhbj_MVAf9bLhK5mEIq_ieBXCgf1pfn4qPxo5c6KAtiGIxH0n8eYolMqXNn-WAOa8kaes3B0Tknzqf1w==",
     }
     ENCRYPTED_PASSWD = "gAAAAABpQUCBRU20tCLX0BKEYj_YxUVXkpHyhTXCvovv9o6vkMDanMTwrnN--oOBslI5CLL0fnQieD_vd1gOzhX0c41p4IkwWA=="
-    FERNET_KEY = "1rC-S3jac21lvKGOeJ-lvq7j1EMnq-qEA_4Zjy4BdWs="
 
     BASE_URL = "https://www.saucedemo.com/"
     INVENTORY_URL = "https://www.saucedemo.com/inventory.html"
