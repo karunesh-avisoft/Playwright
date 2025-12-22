@@ -1,90 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite time="61.95369529724121" tests='6' skipped='0'
-name="Aturesinventry" failures='0' errors='0'><testcase time="9.055874347686768" name="Verify_Available_Products_On_Inventory_Page" status="passed"
+<testsuite time="25.449115753173828" tests='6' skipped='0'
+name="Aturesinventry" failures='6' errors='0'><testcase time="3.7490007877349854" name="Verify_Available_Products_On_Inventory_Page" status="error"
          classname="Inventory_Management" >
-            <system-out>
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 3.749s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
             <![CDATA[
             @scenario.begin
                 
                 scenario: Verify available products on inventory page
-                given User login as 'standard' user ... passed in 8.942s 
-                then User navigates to the inventory page ... passed in 0.08079s 
-e                then User should see 6 products listed ... passed in 0.03291s 
+                given User login as 'standard' user ... error in 3.749s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                then User should see 6 products listed ... skipped in 0.0s 
 @scenario.end
             ----------------------------------------------------------------------------------------------------
             ]]>
             </system-out>
-        </testcase><testcase time="10.769664764404297" name="Sort_Products_By_Different_Options_--_@1.1_" status="passed"
+        </testcase><testcase time="4.494011163711548" name="Sort_Products_By_Different_Options_--_@1.2_" status="error"
          classname="Inventory_Management" >
-            <system-out>
-            <![CDATA[
-            @scenario.begin
-                
-                scenario: Sort products by different options -- @1.1 
-                given User login as 'standard' user ... passed in 8.065s 
-                then User navigates to the inventory page ... passed in 0.1197s 
-e                when the user sorts products by 'az' ... passed in 2.574s 
-                then the products should be sorted by 'name ascending' order ... passed in 0.01097s 
-@scenario.end
-            ----------------------------------------------------------------------------------------------------
-            ]]>
-            </system-out>
-        </testcase><testcase time="10.163617134094238" name="Logout_From_Inventory_Page" status="passed"
-         classname="Inventory_Management" >
-            <system-out>
-            <![CDATA[
-            @scenario.begin
-                
-                scenario: Logout from inventory page
-                given User login as 'standard' user ... passed in 7.611s 
-                then User navigates to the inventory page ... passed in 0.0918s 
-e                when user logs out from the application ... passed in 2.453s 
-                then user should be redirected to the login page ... passed in 0.006986s 
-@scenario.end
-            ----------------------------------------------------------------------------------------------------
-            ]]>
-            </system-out>
-        </testcase><testcase time="10.579722166061401" name="Sort_Products_By_Different_Options_--_@1.2_" status="passed"
-         classname="Inventory_Management" >
-            <system-out>
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 4.494s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
             <![CDATA[
             @scenario.begin
                 
                 scenario: Sort products by different options -- @1.2 
-                given User login as 'standard' user ... passed in 7.944s 
-                then User navigates to the inventory page ... passed in 0.06802s 
-e                when the user sorts products by 'za' ... passed in 2.568s 
-                then the products should be sorted by 'name descending' order ... passed in 0.0s 
+                given User login as 'standard' user ... error in 4.494s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                when the user sorts products by 'za' ... skipped in 0.0s 
+                then the products should be sorted by 'name descending' order ... skipped in 0.0s 
 @scenario.end
             ----------------------------------------------------------------------------------------------------
             ]]>
             </system-out>
-        </testcase><testcase time="10.270404577255249" name="Sort_Products_By_Different_Options_--_@1.3_" status="passed"
+        </testcase><testcase time="4.116020202636719" name="Sort_Products_By_Different_Options_--_@1.4_" status="error"
          classname="Inventory_Management" >
-            <system-out>
-            <![CDATA[
-            @scenario.begin
-                
-                scenario: Sort products by different options -- @1.3 
-                given User login as 'standard' user ... passed in 7.533s 
-                then User navigates to the inventory page ... passed in 0.1995s 
-e                when the user sorts products by 'lohi' ... passed in 2.514s 
-                then the products should be sorted by 'price ascending' order ... passed in 0.02394s 
-@scenario.end
-            ----------------------------------------------------------------------------------------------------
-            ]]>
-            </system-out>
-        </testcase><testcase time="11.114412307739258" name="Sort_Products_By_Different_Options_--_@1.4_" status="passed"
-         classname="Inventory_Management" >
-            <system-out>
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 4.116s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
             <![CDATA[
             @scenario.begin
                 
                 scenario: Sort products by different options -- @1.4 
-                given User login as 'standard' user ... passed in 8.593s 
-                then User navigates to the inventory page ... passed in 0.07822s 
-e                when the user sorts products by 'hilo' ... passed in 2.431s 
-                then the products should be sorted by 'price descending' order ... passed in 0.01197s 
+                given User login as 'standard' user ... error in 4.116s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                when the user sorts products by 'hilo' ... skipped in 0.0s 
+                then the products should be sorted by 'price descending' order ... skipped in 0.0s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="4.8550498485565186" name="Sort_Products_By_Different_Options_--_@1.3_" status="error"
+         classname="Inventory_Management" >
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 4.855s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.3 
+                given User login as 'standard' user ... error in 4.855s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                when the user sorts products by 'lohi' ... skipped in 0.0s 
+                then the products should be sorted by 'price ascending' order ... skipped in 0.0s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="3.9195446968078613" name="Logout_From_Inventory_Page" status="error"
+         classname="Inventory_Management" >
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 3.92s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Logout from inventory page
+                given User login as 'standard' user ... error in 3.92s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                when user logs out from the application ... skipped in 0.0s 
+                then user should be redirected to the login page ... skipped in 0.0s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="4.315489053726196" name="Sort_Products_By_Different_Options_--_@1.1_" status="error"
+         classname="Inventory_Management" >
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: given User login as 'standard' user ... error in 4.315s  Location:Behave/features/inventry.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 10, in step_user_login
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
+            <![CDATA[
+            @scenario.begin
+                
+                scenario: Sort products by different options -- @1.1 
+                given User login as 'standard' user ... error in 4.315s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+e                when the user sorts products by 'az' ... skipped in 0.0s 
+                then the products should be sorted by 'name ascending' order ... skipped in 0.0s 
 @scenario.end
             ----------------------------------------------------------------------------------------------------
             ]]>

@@ -1,31 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite time="15.840008735656738" tests='2' skipped='0'
-name="Atureslogin" failures='0' errors='0'><testcase time="7.751450538635254" name="Unsuccessful_User_Login_With_Incorrect_Username" status="passed"
+<testsuite time="10.620778560638428" tests='2' skipped='0'
+name="Atureslogin" failures='2' errors='0'><testcase time="4.892947196960449" name="Successful_User_Login" status="error"
          classname="User_Login" >
-            <system-out>
-            <![CDATA[
-            @scenario.begin
-                @invalid_login
-                scenario: Unsuccessful user login with incorrect username
-e                given User on the login page ... passed in 3.281s 
-                when User enters 'wrongUser' as username ... passed in 3.075s 
-                when User submit the login form ... passed in 1.265s 
-                then User should see an error message indicating incorrect/incomplete credentials ... passed in 0.1296s 
-@scenario.end
-            ----------------------------------------------------------------------------------------------------
-            ]]>
-            </system-out>
-        </testcase><testcase time="8.088558197021484" name="Successful_User_Login" status="passed"
-         classname="User_Login" >
-            <system-out>
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: when User enters 'standard' as username ... error in 0.0009975s  Location:Behave/features/login.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 23, in user_enter_credentials
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 47, in fill_credentials
+    user = get_user(user_key)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 9, in get_user
+    return decrypt(encrypted.get(user_key))
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
             <![CDATA[
             @scenario.begin
                 
                 scenario: Successful user login
-e                given User on the login page ... passed in 3.29s 
-                when User enters 'standard' as username ... passed in 3.342s 
-                when User submit the login form ... passed in 1.267s 
-                then User navigates to the inventory page ... passed in 0.1885s 
+e                given User on the login page ... passed in 4.892s 
+                when User enters 'standard' as username ... error in 0.0009975s 
+                when User submit the login form ... skipped in 0.0s 
+                then User navigates to the inventory page ... skipped in 0.0s 
+@scenario.end
+            ----------------------------------------------------------------------------------------------------
+            ]]>
+            </system-out>
+        </testcase><testcase time="5.7278313636779785" name="Unsuccessful_User_Login_With_Incorrect_Username" status="error"
+         classname="User_Login" >
+            <failure type="AssertionError" message="'NoneType' object has no attribute 'encode'">
+                    <![CDATA[ Failing step: when User enters 'wrongUser' as username ... error in 1.154s  Location:Behave/features/login.feature
+                        Traceback (most recent call last):
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+
+                  File "Behave\features\steps\login_steps.py", line 23, in user_enter_credentials
+    context.login_page.fill_credentials(username)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\login_page.py", line 51, in fill_credentials
+    self.password.type(get_passwd() or "secret_sauce")
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\credentials.py", line 12, in get_passwd
+    return decrypt(TD.ENCRYPTED_PASSWD)
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 10, in decrypt
+    return get_fernet().decrypt(value.encode()).decode()
+
+                  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\utilities\crypto_utils.py", line 7, in get_fernet
+    return Fernet(key.encode())
+
+                AttributeError: 'NoneType' object has no attribute 'encode'
+                    ]]>
+                </failure><system-out>
+            <![CDATA[
+            @scenario.begin
+                @invalid_login
+                scenario: Unsuccessful user login with incorrect username
+e                given User on the login page ... passed in 4.574s 
+                when User enters 'wrongUser' as username ... error in 1.154s 
+                when User submit the login form ... skipped in 0.0s 
+                then User should see an error message indicating incorrect/incomplete credentials ... skipped in 0.0s 
 @scenario.end
             ----------------------------------------------------------------------------------------------------
             ]]>

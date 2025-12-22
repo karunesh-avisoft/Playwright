@@ -1,6 +1,8 @@
 from utilities.test_data import TestData as TD
 from cryptography.fernet import Fernet
-import os
+import os, dotenv
+
+dotenv.load_dotenv()
 
 def get_fernet():
     key = os.getenv("FERNET_KEY")   

@@ -1,0 +1,6 @@
+features/cart.feature  .FE
+features/checkout.feature  FE
+features/inventry.feature  ......
+features/login.feature  ..
+features/purchase_order.feature  E
+

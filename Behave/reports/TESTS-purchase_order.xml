@@ -1,19 +1,55 @@
-<testsuite name="purchase_order.Successfull Purchase Order Flow" tests="1" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-12-19T16:56:50.261927" hostname="DESKTOP-SFTALKM"><testcase classname="purchase_order.Successfull Purchase Order Flow" name="Successful completion of purchase order" status="untested" time="0"><system-out>
+<testsuite name="purchase_order.Successfull Purchase Order Flow" tests="1" errors="1" failures="0" skipped="0" time="35.505993" timestamp="2025-12-22T15:07:42.944284" hostname="DESKTOP-SFTALKM"><testcase classname="purchase_order.Successfull Purchase Order Flow" name="Successful completion of purchase order" status="error" time="35.505993"><error type="TimeoutError" message="Locator.click: Timeout 30000ms exceeded.&#10;Call log:&#10;  - waiting for locator(&quot;#add-to-cart-sauce-labs-backpack&quot;)">
+<![CDATA[
+Failing step: When User adds item 'backpack' to the cart ... error in 31.020s
+Location: features/purchase_order.feature:9
+Traceback (most recent call last):
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\cart_steps.py", line 22, in step_add_item_to_cart
+    context.inventory_page.add_to_cart(item)
+  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\inventory_page.py", line 134, in add_to_cart
+    add_button.click()
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\sync_api\_generated.py", line 15573, in click
+    self._sync(
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_locator.py", line 160, in click
+    return await self._frame.click(self._selector, strict=True, **params)
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_frame.py", line 549, in click
+    await self._channel.send("click", self._timeout, locals_to_params(locals()))
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#add-to-cart-sauce-labs-backpack")
+
+]]>
+</error><system-out>
 <![CDATA[
 @scenario.begin
+
+  @purchase_order
   Scenario: Successful completion of purchase order
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When User adds item 'backpack' to the cart ... untested in 0.000s
-    And User adds item 'fleece jacket' to the cart ... untested in 0.000s
-    And User clicks on the cart icon ... untested in 0.000s
-    And User proceeds to checkout page ... untested in 0.000s
-    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' ... untested in 0.000s
-    Then User continue from checkout overview ... untested in 0.000s
-    When User verifies total amount as well as finishes the order ... untested in 0.000s
-    Then User should see the order confirmation page with message Thank you for your order! ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.434s
+    Then User navigates to the inventory page ... passed in 0.052s
+    When User adds item 'backpack' to the cart ... error in 31.020s
+    And User adds item 'fleece jacket' to the cart ... skipped in 0.000s
+    And User clicks on the cart icon ... skipped in 0.000s
+    And User proceeds to checkout page ... skipped in 0.000s
+    And User fills checkout details with first name:'John', last name:'Doe', and postal code:'12345' ... skipped in 0.000s
+    Then User continue from checkout overview ... skipped in 0.000s
+    When User verifies total amount as well as finishes the order ... skipped in 0.000s
+    Then User should see the order confirmation page with message Thank you for your order! ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+Item name: sauce-labs-backpack
+
 ]]>
 </system-out></testcase></testsuite>

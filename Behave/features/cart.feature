@@ -3,17 +3,20 @@ Feature: Cart Management
     Background: User logged in as standard user and on inventory page
         Given User login as 'standard' user
         Then User navigates to the inventory page
-    
+
+    @regression
     Scenario: Verify cart updates after adding items
 		When User adds item 'bolt t-shirt' to the cart
 		Then The cart badge should show the correct number of items
 
+    @smoke
 	Scenario: Verify cart updates after removing items
 		When User adds item 'bike light' to the cart
 		And User adds item 'bolt t-shirt' to the cart
 		And User removes item 'bike light' from the cart
 		Then The cart badge should show the correct number of items
 
+    @regression
     Scenario: Verify items and navigation to checkout page from cart
         When User adds item 'bike light' to the cart
 		And User adds item 'bolt t-shirt' to the cart

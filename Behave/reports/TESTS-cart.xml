@@ -1,43 +1,96 @@
-<testsuite name="cart.Cart Management" tests="3" errors="0" failures="0" skipped="0" time="23.469292" timestamp="2025-12-19T14:46:00.267899" hostname="DESKTOP-SFTALKM"><testcase classname="cart.Cart Management" name="Verify cart updates after adding items" status="passed" time="6.185226"><system-out>
+<testsuite name="cart.Cart Management" tests="3" errors="1" failures="1" skipped="0" time="47.446479" timestamp="2025-12-22T15:05:38.313655" hostname="DESKTOP-SFTALKM"><testcase classname="cart.Cart Management" name="Verify cart updates after adding items" status="passed" time="6.341125"><system-out>
 <![CDATA[
 @scenario.begin
+
+  @regression
   Scenario: Verify cart updates after adding items
-    Given User login as 'standard' user ... passed in 5.078s
-    Then User navigates to the inventory page ... passed in 0.054s
-    When User adds item 'bolt t-shirt' to the cart ... passed in 1.048s
-    Then The cart badge should show the correct number of items ... passed in 0.005s
-
-@scenario.end
---------------------------------------------------------------------------------
-]]>
-</system-out></testcase><testcase classname="cart.Cart Management" name="Verify cart updates after removing items" status="passed" time="8.119586"><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: Verify cart updates after removing items
-    Given User login as 'standard' user ... passed in 4.922s
-    Then User navigates to the inventory page ... passed in 0.052s
-    When User adds item 'bike light' to the cart ... passed in 1.053s
-    And User adds item 'bolt t-shirt' to the cart ... passed in 1.048s
-    And User removes item 'bike light' from the cart ... passed in 1.039s
-    Then The cart badge should show the correct number of items ... passed in 0.005s
-
-@scenario.end
---------------------------------------------------------------------------------
-]]>
-</system-out></testcase><testcase classname="cart.Cart Management" name="Verify items and navigation to checkout page from cart" status="passed" time="9.164479"><system-out>
-<![CDATA[
-@scenario.begin
-  Scenario: Verify items and navigation to checkout page from cart
-    Given User login as 'standard' user ... passed in 4.946s
+    Given User login as 'standard' user ... passed in 5.239s
     Then User navigates to the inventory page ... passed in 0.053s
-    When User adds item 'bike light' to the cart ... passed in 1.040s
-    And User adds item 'bolt t-shirt' to the cart ... passed in 1.032s
-    And User clicks on the cart icon ... passed in 1.042s
-    Then User verify the items in cart ... passed in 0.006s
-    When User proceeds to checkout page ... passed in 1.038s
-    Then User should be navigated to the checkout page ... passed in 0.007s
+    When User adds item 'bolt t-shirt' to the cart ... passed in 1.043s
+    Then The cart badge should show the correct number of items ... passed in 0.006s
 
 @scenario.end
 --------------------------------------------------------------------------------
+
+Captured stdout:
+Item name: sauce-labs-bolt-t-shirt
+
+]]>
+</system-out></testcase><testcase classname="cart.Cart Management" name="Verify cart updates after removing items" status="failed" time="5.562788"><failure type="AssertionError" message="Cart badge count mismatch. Expected 1, but got 2">
+<![CDATA[
+Failing step: When User adds item 'bike light' to the cart ... failed in 1.050s
+Location: features/cart.feature:14
+ASSERT FAILED: Cart badge count mismatch. Expected 1, but got 2]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+
+  @smoke
+  Scenario: Verify cart updates after removing items
+    Given User login as 'standard' user ... passed in 4.461s
+    Then User navigates to the inventory page ... passed in 0.052s
+    When User adds item 'bike light' to the cart ... failed in 1.050s
+    And User adds item 'bolt t-shirt' to the cart ... skipped in 0.000s
+    And User removes item 'bike light' from the cart ... skipped in 0.000s
+    Then The cart badge should show the correct number of items ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Item name: sauce-labs-bike-light
+
+]]>
+</system-out></testcase><testcase classname="cart.Cart Management" name="Verify items and navigation to checkout page from cart" status="error" time="35.542565"><error type="TimeoutError" message="Locator.click: Timeout 30000ms exceeded.&#10;Call log:&#10;  - waiting for locator(&quot;#add-to-cart-sauce-labs-bike-light&quot;)">
+<![CDATA[
+Failing step: When User adds item 'bike light' to the cart ... error in 31.015s
+Location: features/cart.feature:21
+Traceback (most recent call last):
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\model.py", line 1991, in run
+    match.run(runner.context)
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\behave\matchers.py", line 105, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\cart_steps.py", line 22, in step_add_item_to_cart
+    context.inventory_page.add_to_cart(item)
+  File "C:\Users\hp\Documents\karunesh\Playwright\Behave\features\..\pages\inventory_page.py", line 134, in add_to_cart
+    add_button.click()
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\sync_api\_generated.py", line 15573, in click
+    self._sync(
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_locator.py", line 160, in click
+    return await self._frame.click(self._selector, strict=True, **params)
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_frame.py", line 549, in click
+    await self._channel.send("click", self._timeout, locals_to_params(locals()))
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+  File "C:\Users\hp\Documents\karunesh\Playwright\.venv\lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#add-to-cart-sauce-labs-bike-light")
+
+]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @regression
+  Scenario: Verify items and navigation to checkout page from cart
+    Given User login as 'standard' user ... passed in 4.477s
+    Then User navigates to the inventory page ... passed in 0.051s
+    When User adds item 'bike light' to the cart ... error in 31.015s
+    And User adds item 'bolt t-shirt' to the cart ... skipped in 0.000s
+    And User clicks on the cart icon ... skipped in 0.000s
+    Then User verify the items in cart ... skipped in 0.000s
+    When User proceeds to checkout page ... skipped in 0.000s
+    Then User should be navigated to the checkout page ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+
+Captured stdout:
+Item name: sauce-labs-bike-light
+
 ]]>
 </system-out></testcase></testsuite>

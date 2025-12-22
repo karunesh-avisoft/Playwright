@@ -1,13 +1,25 @@
-<testsuite name="login.User Login" tests="1" errors="0" failures="0" skipped="0" time="5.518195" timestamp="2025-12-19T17:02:19.571685" hostname="DESKTOP-SFTALKM"><testcase classname="login.User Login" name="Unsuccessful user login with incorrect username" status="passed" time="5.518195"><system-out>
+<testsuite name="login.User Login" tests="2" errors="0" failures="0" skipped="0" time="9.544262" timestamp="2025-12-22T15:07:07.355214" hostname="DESKTOP-SFTALKM"><testcase classname="login.User Login" name="Successful user login" status="passed" time="4.768572"><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario: Successful user login
+    Given User on the login page ... passed in 1.380s
+    When User enters 'standard' as username ... passed in 2.227s
+    And User submit the login form ... passed in 1.109s
+    Then User navigates to the inventory page ... passed in 0.052s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="login.User Login" name="Unsuccessful user login with incorrect username" status="passed" time="4.77569"><system-out>
 <![CDATA[
 @scenario.begin
 
   @invalid_login
   Scenario: Unsuccessful user login with incorrect username
-    Given User on the login page ... passed in 1.856s
-    When User enters 'wrongUser' as username ... passed in 2.353s
-    And User submit the login form ... passed in 1.215s
-    Then User should see an error message indicating incorrect/incomplete credentials ... passed in 0.094s
+    Given User on the login page ... passed in 1.377s
+    When User enters 'wrongUser' as username ... passed in 2.210s
+    And User submit the login form ... passed in 1.057s
+    Then User should see an error message indicating incorrect/incomplete credentials ... passed in 0.132s
 
 @scenario.end
 --------------------------------------------------------------------------------

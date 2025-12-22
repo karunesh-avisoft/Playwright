@@ -1,11 +1,4 @@
-﻿10:46:40 - INFO - Asserting logo
-10:46:40 - INFO - On login page...
-10:46:40 - INFO - Filling credentials
-10:46:44 - INFO - Logging in...
-10:46:46 - INFO - Landing to inventory page
-10:46:46 - INFO - Verifying products on inventory page
-10:46:46 - INFO - Found 6 products on inventory page
-10:46:46 - INFO - On inventory page...
-10:46:47 - INFO - Added "Sauce Labs Bike Light" to cart. Total items in cart: 1
-10:46:49 - INFO - Added "Sauce Labs Bolt T-Shirt" to cart. Total items in cart: 2
-10:46:50 - INFO - Removed "Sauce Labs Bike Light" from cart. Total items in cart: 1
+﻿12:12:04 - INFO - Asserting logo
+12:12:04 - INFO - On login page...
+12:12:04 - INFO - Filling credentials
+12:12:04 - ERROR - 'NoneType' object has no attribute 'encode'

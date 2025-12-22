@@ -1,70 +1,70 @@
-<testsuite name="inventry.Inventory Management" tests="6" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-12-19T16:56:50.255940" hostname="DESKTOP-SFTALKM"><testcase classname="inventry.Inventory Management" name="Verify available products on inventory page" status="untested" time="0"><system-out>
+<testsuite name="inventry.Inventory Management" tests="6" errors="0" failures="0" skipped="0" time="37.542834" timestamp="2025-12-22T15:06:57.662327" hostname="DESKTOP-SFTALKM"><testcase classname="inventry.Inventory Management" name="Verify available products on inventory page" status="passed" time="4.5397"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Verify available products on inventory page
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    Then User should see 6 products listed ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.464s
+    Then User navigates to the inventory page ... passed in 0.053s
+    Then User should see 6 products listed ... passed in 0.022s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.1 " status="untested" time="0"><system-out>
+</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.1 " status="passed" time="6.609339"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Sort products by different options -- @1.1 
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When the user sorts products by 'az' ... untested in 0.000s
-    Then the products should be sorted by 'name ascending' order ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.464s
+    Then User navigates to the inventory page ... passed in 0.051s
+    When the user sorts products by 'az' ... passed in 2.088s
+    Then the products should be sorted by 'name ascending' order ... passed in 0.007s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.2 " status="untested" time="0"><system-out>
+</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.2 " status="passed" time="6.600638"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Sort products by different options -- @1.2 
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When the user sorts products by 'za' ... untested in 0.000s
-    Then the products should be sorted by 'name descending' order ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.455s
+    Then User navigates to the inventory page ... passed in 0.052s
+    When the user sorts products by 'za' ... passed in 2.086s
+    Then the products should be sorted by 'name descending' order ... passed in 0.007s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.3 " status="untested" time="0"><system-out>
+</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.3 " status="passed" time="6.616322"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Sort products by different options -- @1.3 
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When the user sorts products by 'lohi' ... untested in 0.000s
-    Then the products should be sorted by 'price ascending' order ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.474s
+    Then User navigates to the inventory page ... passed in 0.051s
+    When the user sorts products by 'lohi' ... passed in 2.084s
+    Then the products should be sorted by 'price ascending' order ... passed in 0.007s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.4 " status="untested" time="0"><system-out>
+</system-out></testcase><testcase classname="inventry.Inventory Management" name="Sort products by different options -- @1.4 " status="passed" time="6.595212"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario Outline: Sort products by different options -- @1.4 
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When the user sorts products by 'hilo' ... untested in 0.000s
-    Then the products should be sorted by 'price descending' order ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.455s
+    Then User navigates to the inventory page ... passed in 0.052s
+    When the user sorts products by 'hilo' ... passed in 2.082s
+    Then the products should be sorted by 'price descending' order ... passed in 0.007s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="inventry.Inventory Management" name="Logout from inventory page" status="untested" time="0"><system-out>
+</system-out></testcase><testcase classname="inventry.Inventory Management" name="Logout from inventory page" status="passed" time="6.581623"><system-out>
 <![CDATA[
 @scenario.begin
   Scenario: Logout from inventory page
-    Given User login as 'standard' user ... untested in 0.000s
-    Then User navigates to the inventory page ... untested in 0.000s
-    When user logs out from the application ... untested in 0.000s
-    Then user should be redirected to the login page ... untested in 0.000s
+    Given User login as 'standard' user ... passed in 4.425s
+    Then User navigates to the inventory page ... passed in 0.050s
+    When user logs out from the application ... passed in 2.102s
+    Then user should be redirected to the login page ... passed in 0.005s
 
 @scenario.end
 --------------------------------------------------------------------------------

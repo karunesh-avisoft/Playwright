@@ -4,6 +4,7 @@ Feature: Successfull Purchase Order Flow
 		Given User login as 'standard' user
 		Then User navigates to the inventory page
 
+	@purchase_order
 	Scenario: Successful completion of purchase order
 		When User adds item 'backpack' to the cart
 		And User adds item 'fleece jacket' to the cart
