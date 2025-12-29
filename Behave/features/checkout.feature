@@ -3,7 +3,7 @@ Feature: Checkout Page
 	Background: User logged in as problem user and on inventory page
 		Given User login as 'problem' user
 		Then User navigates to the inventory page
-		When User adds item 'backpack' to the cart
+		When User adds item 'fleece jacket' to the cart
 		And User adds item 'Onesie' to the cart
 		And User clicks on the cart icon
 		And User proceeds to checkout page

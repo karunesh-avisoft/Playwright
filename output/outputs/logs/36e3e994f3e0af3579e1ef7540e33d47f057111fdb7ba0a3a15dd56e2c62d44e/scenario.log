@@ -1,4 +1,0 @@
-﻿12:12:06 - INFO - Asserting logo
-12:12:06 - INFO - On login page...
-12:12:06 - INFO - Filling credentials
-12:12:06 - ERROR - 'NoneType' object has no attribute 'encode'

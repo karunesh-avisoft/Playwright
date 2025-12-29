@@ -6,7 +6,7 @@ Feature: Successfull Purchase Order Flow
 
 	@purchase_order
 	Scenario: Successful completion of purchase order
-		When User adds item 'backpack' to the cart
+		When User adds item 'Onesie' to the cart
 		And User adds item 'fleece jacket' to the cart
 		And User clicks on the cart icon
 		And User proceeds to checkout page

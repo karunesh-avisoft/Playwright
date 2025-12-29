@@ -128,7 +128,6 @@ class InventoryPage(BasePage):
                 idx = self.product_names.index(names)
                 break
         item_name = self.product_names[idx].replace(" ", "-").lower()
-        print("Item name:", item_name)
         item_price = self.product_prices[idx]
         add_button = self.add(item_name)
         add_button.click()
